@@ -1,0 +1,136 @@
+Mô tả: Dự án này bao gồm tất cả source code của dự án Poker của Triple_Star team,
+
+Nhóm tác giả:
+    + Hoàng Cao Phong
+    + Nguyễn Trung Kiên
+    + Võ Thúc Trí
+
+*Mọi sao chép và sử dụng nội dung trong thư viện này cần được sự đồng ý của nhóm tác giả
+*Vui lòng liên hệ với nhóm tác giả để liên hệ hợp tác!
+
+
+Hướng dẫn sử dụng bộ thư viện t3_game_library:
+    + Để sử dụng bộ thư viện này, bạn cần include thư viện này vào file của mình bằng cách thêm dòng lệnh sau:
+        #include "t3_game_library/t3_library.h"
+    + Vui lòng đọc hướng dẫn của bộ thư viện trong file "t3_library.h"
+
+
+Tổng quan các chế độ:
+
+    Chế độ PvP (Player vs. Player)
+        Mô tả:
+            + Chế độ PvP cho phép hai người chơi cạnh tranh trực tiếp với nhau. Mỗi người chơi sẽ luân phiên thực hiện lượt chơi của mình.
+        
+        Hướng dẫn:
+            + Khi vào chế độ PvP, nhập số lượng người chơi sẽ tham gia (từ 2 đến 10)
+            + Máy tính sẽ chia ngẫu nhiên các lá bài cho mỗi người chơi
+            + Máy máy tính sẽ tự động tính toán và tìm ra thế bài mạnh nhất của mỗi người và in ra màn hình
+            + Máy tính sẽ tự động xác định người chiến thắng
+
+        Cách tính điểm:
+            + Những người chơi có hoặc cùng có thế bài mạnh nhất sẽ giành sẽ chiến thắng vẽ nhận 1 điểm
+            + Máy tính sẽ tự động cập nhật thông tin của người chơi
+            + Máy tính sẽ in ra màn hình Bảng Leaderboard vòng hiện tại sắp xếp theo tỉ lệ thắng
+            + Trò chơi không giới hạn số lượng vòng chơi
+            + Trò chơi kết thúc khi người tham gia quyết định dừng chơi
+            + Máy tính sẽ in ra màn hình Bảng Leaderboard cuối cùng 
+
+    Chế độ PvE
+        Mô tả:
+            + Chế độ PvE cho phép người chơi đối đầu với máy tính (AI/Bot) được thiết kế bởi Triple_Star team. 
+            + Đây là cách tuyệt vời để luyện tập hoặc giải trí khi không có đối thủ thực.
+
+        Hướng dẫn:
+
+            + Khi vào chế độ PvE, người chơi sẽ được yêu cầu chọn độ khó của bot:
+                Lv1 - Normal: Độ khó cơ bản, bot chơi như một người chơi bình thường 
+                              (tỉ lệ thắng của Bot: ~60%)
+                Lv2 - Challenge: Độ khó ở mức thách thức, bot có khả năng chơi ngang một chuyên gia.
+                              (tỉ lệ thắng của Bot: ~70%)
+                Lv3 - Legendary: Độ khó vô cùng cao, bot có khả năng chơi như một nhà vô địch Poker.
+                              (tỉ lệ thắng của Bot: ~80%)
+            + Máy tính sẽ chia ngẫu nhiên các lá bài
+            + Máy máy tính sẽ tự động tính toán và tìm ra thế bài mạnh nhất của Bot và người rồi in ra màn hình
+            + Máy tính sẽ tự động xác định ai chiến thắng
+        
+        Cách tính điểm:
+            + Ai có hoặc cùng có thế bài mạnh nhất sẽ giành sẽ chiến thắng vẽ nhận 1 điểm
+            + Máy tính sẽ tự động cập nhật thông tin của người chơi và bot
+            + Máy tính sẽ in ra màn hình Bảng Leaderboard vòng hiện tại sắp xếp theo tỉ lệ thắng
+            + Trò chơi không giới hạn số lượng vòng chơi
+            + Trò chơi kết thúc khi người tham gia quyết định dừng chơi
+            + Máy tính sẽ in ra màn hình Bảng Leaderboard cuối cùng 
+
+    Single Card Duel: 
+
+        Mô tả
+            + Chế độ Single Card Duel cho phép nhiều người chơi cạnh tranh trực tiếp
+
+            + Mỗi người sẽ được nhận 1 lá bài
+
+            + Những ai có lá bài mạnh nhất sẽ giành chiến thắng
+
+        Hướng dẫn chơi
+            + Nhập số lượng người chơi:
+
+            + Khi bắt đầu chế độ PvP, người chơi nhập số lượng người tham gia (từ 2 đến 10).
+
+            + Chia bài ngẫu nhiên: Máy tính sẽ tự động chia ngẫu nhiên lá bài cho từng người chơi.
+
+            + Sau khi bài được chia, máy tính sẽ xác định bài mạnh nhất của mỗi người và hiển thị kết quả.
+    
+            + Người chơi có thế bài mạnh nhất sẽ giành chiến thắng vòng đấu và nhận 1 điểm.
+
+            + Nếu có nhiều người cùng sở hữu thế bài mạnh nhất, tất cả họ sẽ nhận 1 điểm.
+
+            + Máy tính tự động cập nhật điểm số của người chơi sau mỗi vòng.
+
+            + Hiển thị Bảng Leaderboard tạm thời, sắp xếp theo tỷ lệ thắng, để mọi người theo dõi tiến độ.
+
+            + Trò chơi không giới hạn vòng
+            
+            + Khi kết thúc trò chơi, máy tính sẽ in ra Bảng Leaderboard cuối cùng, hiển thị kết quả toàn bộ trận đấu
+        
+         Quy tắc so sánh
+            + Bài tây chuẩn (52 lá)
+
+            + Lá bài cao hơn theo thứ tự: 2 < 3 < ... < 10 < J < Q < K < A.
+            
+            + Nếu cùng giá trị: So sánh theo chất bài: Bích (♠) > Cơ (♥) > Rô (♦) > Nhép (♣).
+
+     Three_Card_Poker: 
+
+        Mô tả:
+            + Chế độ Single Card Duel cho phép nhiều người chơi cạnh tranh trực tiếp
+
+            + Mỗi người sẽ được nhận 1 lá bài
+
+            + Những ai có lá bài mạnh nhất sẽ giành chiến thắng
+
+        Hướng dẫn chơi
+            + Nhập số lượng người chơi:
+
+            + Khi bắt đầu chế độ PvP, người chơi nhập số lượng người tham gia (từ 2 đến 10).
+
+            + Chia bài ngẫu nhiên: Máy tính sẽ tự động chia ngẫu nhiên lá bài cho từng người chơi.
+
+            + Sau khi bài được chia, máy tính sẽ xác định bài mạnh nhất của mỗi người và hiển thị kết quả.
+    
+            + Người chơi có thế bài mạnh nhất sẽ giành chiến thắng vòng đấu và nhận 1 điểm.
+
+            + Nếu có nhiều người cùng sở hữu thế bài mạnh nhất, tất cả họ sẽ nhận 1 điểm.
+
+            + Máy tính tự động cập nhật điểm số của người chơi sau mỗi vòng.
+
+            + Hiển thị Bảng Leaderboard tạm thời, sắp xếp theo tỷ lệ thắng, để mọi người theo dõi tiến độ.
+
+            + Trò chơi không giới hạn vòng
+            
+            + Khi kết thúc trò chơi, máy tính sẽ in ra Bảng Leaderboard cuối cùng, hiển thị kết quả toàn bộ trận đấu
+        
+         Quy tắc so sánh
+            + Bài tây chuẩn (52 lá)
+
+            + Lá bài cao hơn theo thứ tự: 2 < 3 < ... < 10 < J < Q < K < A.
+            
+            + Nếu cùng giá trị: So sánh theo chất bài: Bích (♠) > Cơ (♥) > Rô (♦) > Nhép (♣).
