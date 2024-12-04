@@ -1,9 +1,11 @@
 #include "t3_game_library/t3_library.h"
 #include <stdlib.h>
 
-int main() {
-    std::srand(std::time(0));  // Khởi tạo seed cho hàm random
-
+int main() 
+{
+    // Khởi tạo seed cho hàm random
+    std::srand(std::time(0));  
+    
     // In ASCII Art Poker
     printASCIIPoker();
 
