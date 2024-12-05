@@ -101,24 +101,26 @@ Tổng quan các chế độ:
      Three_Card_Poker: 
 
         Mô tả:
-            + Chế độ Single Card Duel cho phép nhiều người chơi cạnh tranh trực tiếp
+            + Chế độ hree_Card_Poker cho phép nhiều người chơi cạnh tranh trực tiếp
 
-            + Mỗi người sẽ được nhận 1 lá bài
+            + Mỗi người sẽ được nhận 3 lá bài
+            
+            + Sử dụng bộ bài từ A (Át) đến K cho tính toán 
 
-            + Những ai có lá bài mạnh nhất sẽ giành chiến thắng
+            + Những ai có thế bài mạnh nhất sẽ giành chiến thắng
 
         Hướng dẫn chơi
             + Nhập số lượng người chơi:
 
-            + Khi bắt đầu chế độ PvP, người chơi nhập số lượng người tham gia (từ 2 đến 10).
+            + Khi bắt đầu chế độ, người chơi nhập số lượng người tham gia (từ 2 đến 10).
 
             + Chia bài ngẫu nhiên: Máy tính sẽ tự động chia ngẫu nhiên lá bài cho từng người chơi.
 
-            + Sau khi bài được chia, máy tính sẽ xác định bài mạnh nhất của mỗi người và hiển thị kết quả.
+            + Sau khi bài được chia, máy tính sẽ xác định điểm tối đa của mỗi người và hiển thị kết quả.
     
-            + Người chơi có thế bài mạnh nhất sẽ giành chiến thắng vòng đấu và nhận 1 điểm.
+            + Người chơi có điểm cao nhất sẽ giành chiến thắng vòng đấu và nhận 1 điểm.
 
-            + Nếu có nhiều người cùng sở hữu thế bài mạnh nhất, tất cả họ sẽ nhận 1 điểm.
+            + Nếu có nhiều người cùng bằng điểm cao nhất, tất cả họ sẽ nhận 1 điểm.
 
             + Máy tính tự động cập nhật điểm số của người chơi sau mỗi vòng.
 
@@ -130,7 +132,16 @@ Tổng quan các chế độ:
         
          Quy tắc so sánh
             + Bài tây chuẩn (52 lá)
-
-            + Lá bài cao hơn theo thứ tự: 2 < 3 < ... < 10 < J < Q < K < A.
             
-            + Nếu cùng giá trị: So sánh theo chất bài: Bích (♠) > Cơ (♥) > Rô (♦) > Nhép (♣).
+            + Giá trị lá bài:
+                A (Át) = 1 điểm.
+                Các lá từ 2 đến 9 giữ nguyên điểm tương ứng với số trên lá bài.
+                10, J, Q, K bằng 10 điểm
+            
+            
+            + Cộng điểm của 3 lá bài.
+            
+            + Chỉ lấy chữ số hàng đơn vị.
+                Ví dụ: Tổng điểm là 18, điểm thực tế là 8.
+            
+            + Điểm tối đa: 9 điểm 
