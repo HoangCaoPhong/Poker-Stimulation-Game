@@ -695,6 +695,9 @@ void run_Single_Card_Duel() {
     }
     cout << endl;
 
+    // In ASCII Art
+    printASCIIArt();
+    
     // nhập số người chơi
     int number_player = input_number_of_players();
 
