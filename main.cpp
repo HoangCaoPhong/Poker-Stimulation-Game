@@ -1,5 +1,4 @@
 #include "t3_game_library/t3_library.h"
-#include <stdlib.h>
 
 int main() 
 {
@@ -27,7 +26,7 @@ int main()
         } 
         
         else {
-            // Hỏi người chơi có muốn tiếp tục chơi PVP/PVE không
+            // Hỏi người chơi có muốn tiếp tục chơi không
             if (ask_to_choose_mode_again()) {
                 select_game_mode(players);
             } else {
