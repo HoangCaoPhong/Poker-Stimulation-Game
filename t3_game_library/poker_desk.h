@@ -1,5 +1,9 @@
 #pragma once
 #include <limits>
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include "game_database.h"
 using namespace std;
 //====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 //Mô tả: Thư viện này bao gồm các hàm liên quan đến giao diện game như việc nhập xuất và hiển thị thông tin 
@@ -65,6 +69,9 @@ using namespace std;
         // In hướng dẫn chơi chế độ Single Card Duel
         void printSingleCardDuelGuide();
 
+        // In hướng dẫn chơi chế độ Three Card Poker
+        void printThreeCardPokerGuide();
+
 //====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
 
@@ -75,7 +82,7 @@ int input_number_of_players()
     cout << "Enter number of players(between 2 and 10): ";
     while (!(cin >> number_player) || number_player < 2 || number_player >= 10) {
         cin.clear();
-        cin.ignore(1000, '\n');
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Enter again: ";
     }
     return number_player;
@@ -477,4 +484,38 @@ void printSingleCardDuelGuide()
     cout << "        + Higher card ranks follow the order: 2 < 3 < ... < 10 < J < Q < K < A.\n";
     cout << "        + If two cards have the same rank:\n";
     cout << "            Suit comparison applies: Spades (♠) > Hearts (♥) > Diamonds (♦) > Clubs (♣).\n";
+}
+
+// In hướng dẫn chơi chế độ Three Card Poker
+void printThreeCardPokerGuide() {
+    std::cout << "Three Card Poker Guide\n";
+    std::cout << "========================\n\n";
+
+    std::cout << "Description:\n";
+    std::cout << "+ The Three_Card_Poker mode allows multiple players to compete directly.\n";
+    std::cout << "+ Each player will receive 3 cards.\n";
+    std::cout << "+ Use the deck from A (Ace) to K for calculation.\n";
+    std::cout << "+ Whoever has the strongest hand will win.\n\n";
+
+    std::cout << "Instructions for Playing:\n";
+    std::cout << "+ Enter the number of players (2 to 10).\n";
+    std::cout << "+ When starting the mode, input the number of participants.\n";
+    std::cout << "+ Randomly deal cards: The computer will randomly deal 3 cards to each player.\n";
+    std::cout << "+ After the cards are dealt, the computer will calculate the score for each player and display the results.\n";
+    std::cout << "+ The player with the highest score will win the round and receive 1 point.\n";
+    std::cout << "+ If multiple players have the same highest score, all will receive 1 point.\n";
+    std::cout << "+ The computer automatically updates the player's score after each round.\n";
+    std::cout << "+ Display the temporary leaderboard, sorted by win rate, to track progress.\n";
+    std::cout << "+ The game has no round limit.\n";
+    std::cout << "+ When the game ends, the final leaderboard will be printed, showing the results of all matches.\n\n";
+
+    std::cout << "Comparison Rules:\n";
+    std::cout << "+ Standard deck (52 cards).\n";
+    std::cout << "+ Card values:\n";
+    std::cout << "  - A (Ace) = 1 point.\n";
+    std::cout << "  - Cards from 2 to 9 keep their numeric value.\n";
+    std::cout << "  - 10, J, Q, K = 10 points.\n";
+    std::cout << "+ Sum the points of 3 cards.\n";
+    std::cout << "+ Only take the unit digit (e.g., total 18 -> actual score 8).\n";
+    std::cout << "+ Maximum score: 9 points.\n";
 }

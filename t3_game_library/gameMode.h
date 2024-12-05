@@ -1,6 +1,6 @@
 #pragma once
 #include "t3_library.h"
-
+using namespace std;
 
 //====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
@@ -30,11 +30,12 @@
     void determine_winner(int number_player, std::vector<int>& player_value_card_points, std::vector<int>& player_rank_points, std::vector<Player>& players);
 //...................................................................................................................................................................................................................................................................................................
 //Chế độ PvE
-    //hàm tạo sô ngẫu nhiên từ 1 đến 10
-    int return_random_number();
 
     // Khởi tạo và thực thi chế độ chơi PVE
     void run_poker_pve_mode();
+
+    //hàm tạo sô ngẫu nhiên từ 1 đến 10
+    int return_random_number();
 
     // Tính điểm cho từng người chơi
         // + Tại tham số bool check_print: true hoặc 1 nếu muốn in và false hoặc 0 nếu không muốn in
@@ -46,29 +47,47 @@
 
 //...................................................................................................................................................................................................................................................................................................
 //Chế độ Single Card Duel
+
+    //Khởi tạo và thực thi chế độ chơi Single Card Duel
+    void run_Single_Card_Duel();    
+
     // Tính điểm cho từng người chơi trong chế độ Single Card Duel
     void calculate_player_points_Single_Card_Duel(int number_player, const std::vector<std::vector<std::string>>& player_cards, int ranks[], int suits[], std::vector<int> &player_value_card_points, std::vector<int> &player_rank_points, bool check_print, bool pve_mode);
     
     // Xác định người chiến thắng
     void determine_winner_Single_Card_Duel(int number_player, std::vector<int>& player_value_card_points, std::vector<int>& player_rank_points, std::vector<Player>& players);
 
-    // Khởi tạo và thực thi chế độ chơi Single Card Duel
-    void run_Single_Card_Duel();
-
     // Hàm kiểm tra giữa 2 lá bài lá nào mạnh hơn
     bool is_stronger_between_2_cards (const Card& a, const Card& b);
 
+//...................................................................................................................................................................................................................................................................................................
+//Chế độ Three Card Poker (Bài cào) 
+
+    // Hàm chạy chế độ Three Card Poker
+    void run_Three_Card_Poker();
+
+    // Hàm chia bài cho chế độ Three Card Poker
+    vector<vector<string>> deal_cards_Three_Card_Poker(vector<string>& shuffled_pack, int number_player);
+
+    // Hàm tính điểm cho chế độ Three Card Poker
+    int calculate_player_score_Three_Card_Poker(vector<string>& player_cards);
+
+    // Hàm xác định người chiến thắng trong chế độ Three Card Poker
+    vector<int> determine_winners_Three_Card_Poker(vector<Player>& players, vector<vector<string>>& player_cards);
+
+
+
+
 //====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-
-
-// Hàm chọn chế độ chơi (PVP hoặc PVE)
+// Hàm chọn chế độ chơi 
 void select_game_mode(std::vector<Player>& players) {
     int mode_choice;
     std::cout << "Choose game mode: " << std::endl;
     std::cout << "1. PVP: Player vs Player" << std::endl;
     std::cout << "2. PVE: Player vs Bot" << std::endl;
     std::cout << "3. Single Card Duel" << std::endl;
-    std::cout << "Enter your choice (1, 2, 3): ";
+    std::cout << "4. Three Card Poker" << std::endl; // Added option for Three Card Poker
+    std::cout << "Enter your choice (1, 2, 3, 4): ";
     std::cin >> mode_choice;
 
     if (mode_choice == 2) {
@@ -79,8 +98,10 @@ void select_game_mode(std::vector<Player>& players) {
         run_poker_pvp_mode();
     } else if (mode_choice == 3) {
         run_Single_Card_Duel();
+    } else if (mode_choice == 4) {
+        run_Three_Card_Poker(); // Added call for Three Card Poker
     } else {
-        std::cout << "Invalid choice. Please choose 1, 2, or 3.\n";
+        std::cout << "Invalid choice. Please choose 1, 2, 3, or 4.\n";
         select_game_mode(players); // Gọi lại nếu chọn sai
     }
 }
@@ -550,7 +571,7 @@ void run_poker_pvp_mode()
 
 
 //hàm tạo sô ngẫu nhiên từ 1 đến 10
-int random_number() {
+int return_random_number() {
     return rand() % 10 + 1;
 }
 
@@ -612,7 +633,7 @@ void run_poker_pve_mode()
         }
 
         // Phase 2: Random to decide if bot keeps winning card
-        int random_result = random_number();
+        int random_result = return_random_number();
     
         if (random_result <= 5 + level) 
            swap(player_cards[0], player_cards[1]);
@@ -858,3 +879,184 @@ void determine_winner_Single_Card_Duel(
         }
     }
 }
+
+
+// Hàm chạy chế độ Three Card Poker
+void run_Three_Card_Poker() {
+    cout << endl << "Welcome to Three Card Poker mode!" << endl;
+
+    // Hỏi người chơi có muốn đọc hướng dẫn không
+    cout << "Do you want to read the guide to playing the Three Card Poker mode game?" << endl;
+    if (check_Yes_No_Input()) {
+        // In hướng dẫn chơi chế độ Three Card Poker
+        printThreeCardPokerGuide();
+    }
+    
+    cout << endl;
+
+    // Nhập số người chơi
+    int number_player = input_number_of_players();
+
+    // Khởi tạo mảng người chơi
+    vector<Player> players(number_player);
+
+    // Khởi tạo các người chơi mặc định
+    for (int i = 0; i < number_player; ++i) {
+        players[i] = create_player(i + 1);
+    }
+
+    int cnt = 0;
+
+    // Vòng lặp chơi
+    do {
+        // Bộ bài 52 lá
+        vector<string> pack = return_pack();
+
+        // Xáo bài
+        vector<string> shuffled_pack = return_shuffled_pack(pack);
+
+        // Chia bài cho người chơi
+        vector<vector<string>> player_cards = deal_cards_Three_Card_Poker(shuffled_pack, number_player);
+
+        // Tính điểm cho người chơi
+        vector<int> player_points(number_player);
+        for (int i = 0; i < number_player; ++i) {
+            player_points[i] = calculate_player_score_Three_Card_Poker(player_cards[i]);
+        }
+
+        // In ra lá bài của người chơi
+        print_all_player_cards(player_cards, number_player);
+
+        // Xác định người chiến thắng
+        vector<int> winners = determine_winners_Three_Card_Poker(players, player_cards);
+
+        // In ra người chiến thắng
+        cout << "Winner(s): ";
+        for (int i = 0; i < winners.size(); ++i) {
+            cout << "Player " << winners[i] + 1;
+            if (i != winners.size() - 1) cout << ", ";
+        }
+        cout << endl;
+
+        // In thông tin người chơi sau mỗi vòng
+        cout << "\n==========================================================================================================" << endl;
+        for (const auto& player : players) {
+            print_player_info(player);
+        }
+
+        // Sau mỗi vòng chơi, hiển thị bảng xếp hạng
+        leaderboard(players);
+
+        // Tăng số lần chơi lên
+        ++cnt;
+
+        // Câu hỏi tiếp tục chơi chỉ được hỏi từ lần thứ 2 trở đi
+        if (cnt > 0) {
+            cout << "Do you want to continue playing? (Y/N): ";
+        }
+
+    } while (cnt == 0 || check_Yes_No_Input());
+
+    // In thông tin người chơi sau khi chơi xong
+    final_leaderboard(players);
+}
+
+// Hàm chia bài cho chế độ Three Card Poker
+vector<vector<string>> deal_cards_Three_Card_Poker(vector<string>& shuffled_pack, int number_player) {
+    vector<vector<string>> player_cards(number_player);  // Mảng 2 chiều chứa bài của từng người chơi
+    
+    // Mỗi người chơi sẽ nhận 3 lá bài
+    int card_index = 0;
+    for (int i = 0; i < number_player; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            player_cards[i].push_back(shuffled_pack[card_index]);
+            card_index++;
+        }
+    }
+
+    return player_cards;
+}
+
+// Hàm tính điểm cho chế độ Three Card Poker
+int calculate_player_score_Three_Card_Poker(vector<string>& player_cards) {
+    int score = 0;
+
+    // Hàm phụ để tính giá trị của một lá bài
+    auto get_card_value = [](const string& card) -> int {
+        // Lấy giá trị của lá bài (2 đến 10, Jack = 10, Queen = 10, King = 10, Ace = 1)
+        if (card[0] == 'A') return 1;
+        if (card[0] == 'K' || card[0] == 'Q' || card[0] == 'J' || card[0] == '1') return 10;
+        return card[0] - '0';  // Đối với các lá bài số từ 2 đến 9
+    };
+
+    // Tính tổng điểm của 3 lá bài, chỉ lấy chữ số hàng đơn vị
+    for (const string& card : player_cards) {
+        score += get_card_value(card);
+    }
+
+    return score % 10;  // Chỉ lấy chữ số hàng đơn vị
+}
+
+// Function to calculate player score for Three Card Poker (you should implement this function)
+int calculate_player_score_Three_Card_Poker(const vector<string>& cards) {
+    // Implement the logic for calculating the score based on the Three Card Poker rules
+    // For now, assume a dummy score calculation (this needs to be adjusted)
+    return rand() % 10 + 1;  // Random score for testing
+}
+
+// Function to determine the winners in Three Card Poker mode
+vector<int> determine_winners_Three_Card_Poker(vector<Player>& players, vector<vector<string>>& player_cards) {
+    vector<int> winners;
+    vector<int> player_scores(players.size());
+    enum Suit { Clubs, Diamonds, Hearts, Spades };
+
+    // Map card values and suits to strings (for printing the card details)
+    map<int, string> value_names = {{2, "2"}, {3, "3"}, {4, "4"}, {5, "5"}, {6, "6"}, {7, "7"}, {8, "8"},
+                                    {9, "9"}, {10, "10"}, {11, "J"}, {12, "Q"}, {13, "K"}, {14, "A"}};
+    map<int, string> suit_names = {{Clubs, "Clubs"}, {Diamonds, "Diamonds"}, {Hearts, "Hearts"}, {Spades, "Spades"}};
+
+    // Calculate the score for each player
+    for (int i = 0; i < players.size(); ++i) {
+        player_scores[i] = calculate_player_score_Three_Card_Poker(player_cards[i]);
+    }
+
+    // Find the highest score
+    int max_score = *max_element(player_scores.begin(), player_scores.end());
+
+    // Find all players with the highest score
+    for (int i = 0; i < players.size(); ++i) {
+        if (player_scores[i] == max_score) {
+            winners.push_back(i);
+            players[i].wins++;  // Update win count for the winner
+        }
+        players[i].total_games++;  // Update total games played
+        players[i].win_rate = (float)players[i].wins / players[i].total_games * 100;  // Update win rate
+    }
+
+    // Print the results and update player stats for winners
+    if (winners.size() == 1) {
+        // Single winner
+        int winner = winners[0];
+        cout << "Player " << players[winner].number << " wins with score: " << player_scores[winner] << endl;
+
+        // Record the win situation with score
+        players[winner].win_situations["Won with score: " + to_string(player_scores[winner])]++;
+
+    } else {
+        // Tie case
+        cout << "It's a tie! The following players have won with score " << max_score << ":\n";
+        for (int winner : winners) {
+            cout << "Player " << players[winner].number << " with cards: ";
+            for (const string& card : player_cards[winner]) {
+                cout << card << " ";
+            }
+            cout << "and score: " << player_scores[winner] << endl;
+
+            // Record the win situation for each winner
+            players[winner].win_situations["Tied with score: " + to_string(player_scores[winner])]++;
+        }
+    }
+
+    return winners;
+}
+

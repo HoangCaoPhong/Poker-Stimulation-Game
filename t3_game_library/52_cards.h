@@ -1,10 +1,11 @@
 #pragma once
-#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
 #include <cstdlib> // Thêm thư viện này để dùng srand
 #include <ctime>   // Thêm thư viện này để dùng time
+#include <algorithm> // Thêm thư viện này để dùng random_shuffle
+#include <map>
 using namespace std;
 
 //====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
@@ -37,6 +38,19 @@ using namespace std;
 
     // Hàm lấy chất từ chuỗi
     int get_suit(const std::string& card);
+
+    /*
+    // Hàm chia bài cho n người chơi chế độ Three Card Poker
+    vector<vector<string>> deal_cards_Three_Card_Poker(const vector<string>& shuffled_pack, int number_player);
+    */
+
+   //Hàm phát bài trong chế độ Three Card Poker và sắp xếp các lá bài theo thứ hạng
+    vector<vector<string>> deal_cards_Three_Card_Poker(const vector<string>& shuffled_pack, int number_player);
+
+
+    //Hàm săp xếp lá bài của người chơi trong chế độ Three Card Poker
+    void rank_player_cards_Three_Card_Poker(std::vector<std::vector<std::string>>& player_cards, int number_player, int ranks[], int suits[]) ;
+
 
 //====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
@@ -127,10 +141,13 @@ vector<vector<string>> deal_cards(const vector<string>& shuffled_pack, int numbe
 
 
 // Tách giá trị thứ hạng từ chuỗi
-int get_rank(const std::string& card) {
-    std::string rank_str = card.substr(0, card.find(" "));
-    std::map<std::string, int> rank_map = {{"2",1},{"3",2},{"4",3},{"5",4},{"6",5}, {"7", 6}, {"8", 7}, {"9", 8}, {"10", 9}, {"J", 10}, {"Q", 11}, {"K", 12}, {"A", 13}};
-    return rank_map[rank_str];
+int get_rank(const std::string& card) { 
+    std::string rank_str = card.substr(0, card.find(" ")); 
+    std::map<std::string, int> rank_map = {{"2", 1}, {"3", 2}, {"4", 3}, 
+                                            {"5", 4}, {"6", 5}, {"7", 6}, 
+                                            {"8", 7}, {"9", 8}, {"10", 9}, 
+                                            {"J", 10}, {"Q", 11}, {"K", 12}, {"A", 13}}; 
+    return rank_map[rank_str]; // Trả về giá trị thứ hạng của lá bài }
 }
 
 // Tách chất từ chuỗi (giả sử chất nằm sau khoảng trắng)
@@ -149,3 +166,12 @@ vector<vector<string>> deal_cards_Single_Card_Duel(const vector<string>& shuffle
     }
     return player_cards;
 }
+
+// Lấy giá trị điểm của lá bài (chỉ tính chữ số hàng đơn vị)
+int get_card_value(const std::string& card) {
+    int rank = get_rank(card);  // Lấy giá trị thứ hạng của lá bài
+
+    // Cộng điểm và chỉ lấy chữ số hàng đơn vị (mod 10)
+    return rank > 10 ? 10 : rank;  // Các lá bài lớn hơn 10 (J, Q, K) có giá trị là 10
+}
+
