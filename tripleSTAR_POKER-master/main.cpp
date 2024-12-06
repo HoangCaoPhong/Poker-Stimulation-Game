@@ -1,5 +1,5 @@
 #include "t3_game_library/t3_library.h"
-//check
+
 int main() 
 {
     // Khởi tạo seed cho hàm random
