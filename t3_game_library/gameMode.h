@@ -559,6 +559,8 @@ void run_poker_pvp_mode()
     
     // In thông tin người chơi sau khi cập nhật
     final_leaderboard(players);
+
+    save_game_data_to_file("Poker PvP mode", players);
 }
 
 //hàm tạo số ngẫu nhiên từ 1 đến 10
@@ -673,6 +675,8 @@ void run_poker_pve_mode()
 
     // Display final leaderboard
     final_leaderboard_pve(players);
+
+    save_game_data_to_file("Poker PvE mode", players);
 }
 
 
@@ -759,6 +763,8 @@ void run_Single_Card_Duel() {
 
     // In thông tin người chơi sau khi cập nhật
     final_leaderboard(players);
+
+    save_game_data_to_file("Single Card Duel", players);
 }
 
 // Hàm tính điểm cho chế độ Single Card Duel
@@ -956,6 +962,8 @@ void run_Three_Card_Poker() {
 
     // In thông tin người chơi sau khi chơi xong
     final_leaderboard(players);
+
+    save_game_data_to_file("Three Card Poker", players);
 }
 
 // Hàm chia bài cho chế độ Three Card Poker

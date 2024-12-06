@@ -2,6 +2,9 @@
 
 int main() 
 {
+    // Xóa nội dung file DataTable.txt
+    void clear_file();
+
     // Khởi tạo seed cho hàm random
     std::srand(std::time(0));  
     
