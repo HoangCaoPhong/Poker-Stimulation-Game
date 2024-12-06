@@ -14,6 +14,10 @@
     
     // Hàm lưu dữ liệu trò chơi vào file
     void save_game_data_to_file(const std::string& mode, const std::vector<Player>& players);
+
+
+    // Hàm lưu dữ liệu trò chơi vào file cho chế độ Poker PvE
+    void save_game_data_to_file_poker_PvE_mode(const std::string& mode, const std::vector<Player>& players);
     
 
 //====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
@@ -81,6 +85,69 @@ void save_game_data_to_file(const std::string& mode, const std::vector<Player>& 
 
         outfile.close();
     
+    } else {
+        std::cout << "Unable to open file for saving game data." << std::endl;
+    }
+}
+
+// Hàm lưu dữ liệu trò chơi vào file cho chế độ Poker PvE
+void save_game_data_to_file_poker_PvE_mode(const std::string& mode, const std::vector<Player>& players) {
+    // Tạo file để lưu dữ liệu
+    std::ofstream outfile("Data_Game.txt", std::ios::app); // Mở file ở chế độ thêm (append)
+
+    if (outfile.is_open()) {
+        // Lưu chế độ chơi
+        outfile << "Game Mode: " << mode << std::endl;
+
+        // Lưu thông tin từng người chơi
+        outfile << "Players: " << std::endl;
+        for (const auto& player : players) {
+            std::string participant = (player.number == 1) ? "Bot" : "Player ";
+
+            outfile << participant << ":" << std::endl;
+            outfile << "  Total Games: " << player.total_games << std::endl;
+            outfile << "  Wins: " << player.wins << std::endl;
+            outfile << "  Win Rate: " << std::fixed << std::setprecision(2) << player.win_rate << "%" << std::endl;
+
+            // Lưu các tình huống thắng
+            outfile << "  Win Situations:" << std::endl;
+            if (player.win_situations.empty()) {
+                outfile << "    No winning situations recorded." << std::endl;
+            } else {
+                for (const auto& situation : player.win_situations) {
+                    outfile << "    " << situation.first << ": " << situation.second << " wins" << std::endl;
+                }
+            }
+            outfile << "-------------------------" << std::endl;
+        }
+
+        // Tạo bảng xếp hạng
+        std::vector<Player> sorted_players = players;
+        std::sort(sorted_players.begin(), sorted_players.end(), [](const Player& a, const Player& b) {
+            return a.win_rate > b.win_rate;
+        });
+
+        // Lưu bảng xếp hạng cuối cùng
+        outfile << "\n======================== FINAL LEADERBOARD ========================\n";
+        outfile << std::left << std::setw(10) << "Rank"
+                << std::setw(15) << "Participant"
+                << std::setw(15) << "Games Played"
+                << std::setw(10) << "Wins"
+                << std::setw(12) << "Win Rate (%)" << std::endl;
+
+        for (size_t i = 0; i < sorted_players.size(); ++i) {
+            const Player& player = sorted_players[i];
+            std::string participant = (player.number == 1) ? "Bot" : "Player ";
+
+            outfile << std::left << std::setw(10) << (i + 1)
+                    << std::setw(15) << participant
+                    << std::setw(15) << player.total_games
+                    << std::setw(10) << player.wins
+                    << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
+        }
+        outfile << "===================================================================\n\n\n";
+
+        outfile.close();
     } else {
         std::cout << "Unable to open file for saving game data." << std::endl;
     }
