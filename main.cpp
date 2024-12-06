@@ -8,7 +8,7 @@ int main()
     // In ASCII Art Poker
     printASCIIPoker();
 
-    cout << endl;
+    std::cout << std::endl;
 
     // Khởi tạo danh sách người chơi
     std::vector<Player> players;

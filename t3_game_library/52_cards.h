@@ -6,7 +6,6 @@
 #include <ctime>   // Thêm thư viện này để dùng time
 #include <algorithm> // Thêm thư viện này để dùng random_shuffle
 #include <map>
-using namespace std;
 
 //====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
@@ -19,19 +18,19 @@ using namespace std;
 //Thư viện này bao gồm các hàm:
 
     //Hàm tạo và trả về bộ bài 52 lá
-    vector <string> return_pack ();
+    std::vector<std::string> return_pack ();
     
     //Hàm sắp xếp lá bài của các người chơi
     void rank_player_cards(std::vector<std::vector<std::string>>& player_cards, int number_player, int ranks[], int suits[]);
 
     //Hàm xào bài ngẫu nhiên
-    vector <string> return_shuffled_pack (vector <string> shuffled_pack);
+    std::vector<std::string> return_shuffled_pack (std::vector<std::string> shuffled_pack);
 
     // Hàm chia bài cho n người chơi
-    vector<vector<string>> deal_cards(const vector<string>& shuffled_pack, int number_player);
+    std::vector<std::vector<std::string>> deal_cards(const std::vector<std::string>& shuffled_pack, int number_player);
 
     // Hàm chia bài cho n người chơi chế độ Single Card Duel
-    vector<vector<string>> deal_cards_Single_Card_Duel(const vector<string>& shuffled_pack, int number_player);
+    std::vector<std::vector<std::string>> deal_cards_Single_Card_Duel(const std::vector<std::string>& shuffled_pack, int number_player);
 
     // Hàm lấy giá trị thứ hạng từ chuỗi
     int get_rank(const std::string& card);
@@ -41,11 +40,11 @@ using namespace std;
 
     /*
     // Hàm chia bài cho n người chơi chế độ Three Card Poker
-    vector<vector<string>> deal_cards_Three_Card_Poker(const vector<string>& shuffled_pack, int number_player);
+    std::vector<std::vector<std::string>> deal_cards_Three_Card_Poker(const std::vector<std::string>& shuffled_pack, int number_player);
     */
 
    //Hàm phát bài trong chế độ Three Card Poker và sắp xếp các lá bài theo thứ hạng
-    vector<vector<string>> deal_cards_Three_Card_Poker(const vector<string>& shuffled_pack, int number_player);
+    std::vector<std::vector<std::string>> deal_cards_Three_Card_Poker(const std::vector<std::string>& shuffled_pack, int number_player);
 
 
     //Hàm săp xếp lá bài của người chơi trong chế độ Three Card Poker
@@ -57,9 +56,9 @@ using namespace std;
 
 
 //tạo và trả về bộ bài 52 lá
- vector <string> return_pack ()
+ std::vector<std::string> return_pack ()
  {
-    vector <string> pack;
+    std::vector<std::string> pack;
     for(int i = 1; i <= 52; i++){
         switch (i % 13 ) 
         {
@@ -74,8 +73,8 @@ using namespace std;
             case 1: pack.push_back("A");
                 break;
             default: 
-                string s;
-			    s = (char)(i % 13 + 48 );
+                std::string s;
+                s = (char)(i % 13 + 48 );
                 pack.push_back(s); 
                 break;
         }
@@ -107,8 +106,8 @@ void rank_player_cards(std::vector<std::vector<std::string>>& player_cards, int 
         for (int i = 0; i < 4; i++) {
             for (int j = i + 1; j < 5; j++) {
                 if (ranks[player_index * 5 + i] > ranks[player_index * 5 + j]) {
-                    swap(player_cards[player_index][i], player_cards[player_index][j]);
-                    swap(ranks[player_index * 5 + i], ranks[player_index * 5 + j]);
+                    std::swap(player_cards[player_index][i], player_cards[player_index][j]);
+                    std::swap(ranks[player_index * 5 + i], ranks[player_index * 5 + j]);
                 }
             }
         }
@@ -117,21 +116,21 @@ void rank_player_cards(std::vector<std::vector<std::string>>& player_cards, int 
 
 
 //xào bài
-vector <string> return_shuffled_pack (vector <string> shuffled_pack)
+std::vector<std::string> return_shuffled_pack (std::vector<std::string> shuffled_pack)
 {
     // Nhận một số ngẫu nhiên khác nhau mỗi lần chương trình chạy
     //tham khảo ở https://www.w3schools.com/cpp/cpp_howto_random_number.asp
     srand(time(0));
     //xáo bài tham khảo ở https://www.w3schools.com/cpp/ref_algorithm_random_shuffle.asp
-    random_shuffle(shuffled_pack.begin(), shuffled_pack.end());
+    std::random_shuffle(shuffled_pack.begin(), shuffled_pack.end());
     return shuffled_pack;
 }
 
 
 // Chia bài 
-vector<vector<string>> deal_cards(const vector<string>& shuffled_pack, int number_player) 
+std::vector<std::vector<std::string>> deal_cards(const std::vector<std::string>& shuffled_pack, int number_player) 
 {
-    vector<vector<string>> player_cards(number_player); // Mỗi người chơi sẽ có một vector riêng
+    std::vector<std::vector<std::string>> player_cards(number_player); // Mỗi người chơi sẽ có một vector riêng
     for (int i = 0; i < number_player * 5; i++) 
     {
         player_cards[i % number_player].push_back(shuffled_pack[i]);
@@ -158,9 +157,9 @@ int get_suit(const std::string& card) {
 }
 
 // Hàm chia bài cho n người chơi chế độ Single Card Duel
-vector<vector<string>> deal_cards_Single_Card_Duel(const vector<string>& shuffled_pack, int number_player) 
+std::vector<std::vector<std::string>> deal_cards_Single_Card_Duel(const std::vector<std::string>& shuffled_pack, int number_player) 
 {
-    vector<vector<string>> player_cards(number_player); // Mỗi người chơi sẽ có một vector riêng
+    std::vector<std::vector<std::string>> player_cards(number_player); // Mỗi người chơi sẽ có một vector riêng
     for (int i = 0; i < number_player; i++) {
         player_cards[i].push_back(shuffled_pack[i]); // Mỗi người chơi nhận 1 lá bài
     }
