@@ -799,13 +799,13 @@ void calculate_player_points_Single_Card_Duel(int number_player, const std::vect
     std::map<int, std::string> rank_map = {{1, "2"}, {2, "3"}, {3, "4"}, {4, "5"}, {5, "6"}, {6, "7"}, {7, "8"},
                                           {8, "9"}, {9, "10"}, {10, "J"}, {11, "Q"}, {12, "K"}, {13, "A"}};
     
-    std::map<int, std::string> suit_map = {{0, "Clubs"}, {1, "Diamonds"}, {2, "Hearts"}, {3, "Spades"}};
+    std::map<int, std::string> suit_map = {{0, "Spades"}, {1, "Clubs"}, {2, "Diamonds"}, {3, "Hearts"}};
 
     // Iterate through each player
     for (int player_index = 0; player_index < number_player; player_index++) {
         // Get the rank and suit of the card for each player
-        int rank = ranks[player_index];   // Rank (2 - 14 for 2 - A)
-        int suit = suits[player_index];   // Suit (0 = Clubs, 1 = Diamonds, 2 = Hearts, 3 = Spades)
+        int rank = ranks[player_index];   
+        int suit = suits[player_index];   
 
         // Set player card points: rank for value, suit for comparison order
         player_value_card_points[player_index] = rank;
@@ -856,7 +856,7 @@ void determine_winner_Single_Card_Duel(
     // Map card values and suits to strings
     std::map<int, std::string> value_names = {{1, "2"}, {2, "3"}, {3, "4"}, {4, "5"}, {5, "6"}, {6, "7"}, {7, "8"},
                                           {8, "9"}, {9, "10"}, {10, "J"}, {11, "Q"}, {12, "K"}, {13, "A"}};
-    std::map<int, std::string> suit_names = {{0, "Clubs"}, {1, "Diamonds"}, {2, "Hearts"}, {3, "Spades"}};
+    std::map<int, std::string> suit_names = {{0, "Spades"}, {1, "Clubs"}, {2, "Diamonds"}, {3, "Hearts"}};
 
     std::cout << std::endl;
 
