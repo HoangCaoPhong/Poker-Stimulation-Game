@@ -515,6 +515,7 @@ void printPvEGuide() {
 
 // Print ASCII Art Poker
     void printASCIIPoker() {
+    setTextColor(4); // Set color to Blue
     std::cout << "  _____      _             \n";
     std::cout << " |  __ \\    | |            \n";
     std::cout << " | |__) |__ | | _____ _ __ \n";
@@ -523,6 +524,7 @@ void printPvEGuide() {
     std::cout << " |_|   \\___/|_|\\_\\___|_|   \n";
     std::cout << "                           \n";
     std::cout << "                           \n";
+    setTextColor(0); // Reset color
 }
 
 // Print ASCII Art
@@ -579,7 +581,8 @@ void printASCIIArt() {
 
 
 void printSingleCardDuelGuide()
-{
+{   
+    setTextColor(6); // Set color to Cyan
     std::cout << "\nSingle Card Duel:\n\n";
 
     std::cout << "    Description:\n";
@@ -608,6 +611,7 @@ void printSingleCardDuelGuide()
     std::cout << "        + Higher card ranks follow the order: 2 < 3 < ... < 10 < J < Q < K < A.\n";
     std::cout << "        + If two cards have the same rank:\n";
     std::cout << "            Suit comparison applies: Spades (♠) > Hearts (♥) > Diamonds (♦) > Clubs (♣).\n";
+    setTextColor(0); // Reset color
 }
 
 // Print the Three Card Poker mode guide

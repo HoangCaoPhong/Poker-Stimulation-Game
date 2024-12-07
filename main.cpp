@@ -19,10 +19,9 @@ int main()
     // Initialize seed for random function
     std::srand(std::time(0));  
     
-    // Print ASCII Art Poker with color
-    std::cout << GREEN;
+    // Print ASCII Art Poker with color  
     printASCIIPoker();
-    std::cout << RESET;
+
 
     std::cout << std::endl;
 
