@@ -1,25 +1,25 @@
 Game Mode: Single Card Duel
 Players: 
 Player #1
-Username: 1
+Username: n
+Total Games: 1
+Wins: 1
+Win Rate: 100%
+Win Situations: 
+  A of Clubs: 1 times
+-------------------------
+Player #2
+Username: n
 Total Games: 1
 Wins: 0
 Win Rate: 0%
 Win Situations: 
 -------------------------
-Player #2
-Username: 2
-Total Games: 1
-Wins: 1
-Win Rate: 100%
-Win Situations: 
-  Q of Spades: 1 times
--------------------------
 
 ================================= FINAL LEADERBOARD ===================================
 Rank      Player No.     Username            Games Played   Wins      Win Rate (%)
-1         2              2                   1              1         100.00      
-2         1              1                   1              0         0.00        
+1         1              n                   1              1         100.00      
+2         2              n                   1              0         0.00        
 ========================================================================================
 
 

@@ -21,7 +21,8 @@ int main()
     
     // Print ASCII Art Poker with color  
     printASCIIPoker();
-
+    
+    std::cout << "Welcome to Triple Star's Poker Game!" << std::endl;
 
     std::cout << std::endl;
 
