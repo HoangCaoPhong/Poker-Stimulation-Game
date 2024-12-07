@@ -192,7 +192,7 @@ Tổng quan các chế độ:
             5. Nếu hai hoặc nhiều người chơi có cùng hạng lá bài, sẽ xem xét đến chất để phân thắng thua:
                 Chất có giá trị lớn hơn sẽ chiến thắng. 
 
-     Three_Card_Poker: 
+     Three Card Poker: 
 
         Mô tả:
             + Chế độ Three_Card_Poker cho phép nhiều người chơi cạnh tranh trực tiếp
