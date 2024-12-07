@@ -34,16 +34,23 @@
         std::map<std::string, int> win_situations; 
     };
 
-    // Hàm khởi tạo người chơi 
-    Player create_player(int player_number) {
-        Player p;
-        p.number = player_number;
-        p.total_games = 0;
-        p.wins = 0;
-        p.win_rate = 0.0;
-        // Khởi tạo thêm các giá trị khác nếu cần
-        return p;
-    }
+// Hàm khởi tạo người chơi
+Player create_player(int player_number) {
+    Player p;
+    p.number = player_number;
+
+    // Nhập tên người chơi
+    std::cout << "Please input Username: (Player " << player_number << "): ";
+    std::getline(std::cin, p.username);
+
+    // Các thông tin mặc định
+    p.total_games = 0;
+    p.wins = 0;
+    p.win_rate = 0.0;
+
+    // Trả về người chơi
+    return p;
+}
 
     // Hàm khởi tạo người chơi trong chế độ Poker PvE
     Player create_player_Poker_PvE_mode(int player_number) {

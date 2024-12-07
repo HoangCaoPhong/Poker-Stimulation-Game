@@ -496,10 +496,14 @@ void run_poker_pvp_mode()
     // khởi tạo mảng gồm dữ liệu người chơi 
     std::vector<Player> players(number_player);
 
+    std::cout << std::endl;
+    
     // khởi tạo các người chơi mặc định
+    std::cin.get();
     for (int i = 0; i < number_player; ++i) 
     {
         players[i] = create_player(i + 1);
+        std::cout << std::endl;
     }
 
     int cnt = 0;
@@ -588,12 +592,12 @@ void run_poker_pve_mode()
     }
 
     // Chọn mức độ khó của trò chơi
-    int level = selectGameLevel(); 
+    int level_bot = selectGameLevel(); 
     
     // Tạo thông tin người chơi
     std::vector<Player> players(number_of_players);
-    players[0] = create_player(1); // Người chơi
-    players[1] = create_player(2); // Bot
+    players[0] = create_player_Poker_PvE_mode(1); // Người chơi
+    players[1] = create_player_Poker_PvE_mode(2); // Bot
 
     int cnt = 0;
 
@@ -629,7 +633,7 @@ void run_poker_pve_mode()
         // Phase 2: Random to decide if bot keeps winning card
         int random_result = return_random_number();
     
-        if (random_result <= 5 + level) 
+        if (random_result <= 5 + level_bot) 
            std::swap(player_cards[0], player_cards[1]);
            
         // Phase 3: Display cards of player and bot
@@ -656,12 +660,12 @@ void run_poker_pve_mode()
         std::cout << std::endl;
         
         // Display player and bot information
-        print_pve_info(players[0], false);
+        print_pve_info(players[0], false, level_bot);
         std::cout << std::endl;
-        print_pve_info(players[1], true);
+        print_pve_info(players[1], true, level_bot);
 
         // Display current leaderboard
-        leaderboard_pve(players);
+        leaderboard_pve(players, level_bot);
 
         // Increase the number of plays
         ++cnt;
@@ -674,7 +678,7 @@ void run_poker_pve_mode()
     } while (cnt == 0 || check_Yes_No_Input());
 
     // Display final leaderboard
-    final_leaderboard_pve(players);
+    final_leaderboard_pve(players, level_bot);
 
     save_game_data_to_file_poker_PvE_mode("Poker PvE mode", players);
 }

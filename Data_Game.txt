@@ -2,46 +2,22 @@ Game Mode: Poker PvP mode
 Players: 
 Player #1
 Total Games: 1
+Wins: 0
+Win Rate: 0%
+Win Situations: 
+-------------------------
+Player #2
+Total Games: 1
 Wins: 1
 Win Rate: 100%
 Win Situations: 
   High Card: 1 times
 -------------------------
-Player #2
-Total Games: 1
-Wins: 0
-Win Rate: 0%
-Win Situations: 
--------------------------
 
 ======================== FINAL LEADERBOARD ========================
 Rank      Player No.     Games Played   Wins      Win Rate (%)
-1         1              1              1         100.00      
-2         2              1              0         0.00        
-===================================================================
-
-
-Game Mode: Poker PvE mode
-Players: 
-Bot:
-  Total Games: 1
-  Wins: 1
-  Win Rate: 100.00%
-  Win Situations:
-    Pair: 1 wins
--------------------------
-Player :
-  Total Games: 1
-  Wins: 0
-  Win Rate: 0.00%
-  Win Situations:
-    No winning situations recorded.
--------------------------
-
-======================== FINAL LEADERBOARD ========================
-Rank      Participant    Games Played   Wins      Win Rate (%)
-1         Bot            1              1         100.00      
-2         Player         1              0         0.00        
+1         2              1              1         100.00      
+2         1              1              0         0.00        
 ===================================================================
 
 

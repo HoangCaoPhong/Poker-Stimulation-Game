@@ -46,10 +46,10 @@
         void print_pve_info(const Player& player, bool check_bot);
 
         // Hàm in leaderboard (PvE) xếp hạng người chơi dựa trên tỷ lệ thắng
-        void leaderboard_pve(const std::vector<Player>& players);
+        void leaderboard_pve(const std::vector<Player>& players, int level_bot);
 
         //Hàm in leaderboard (PvE) cuối cùng xếp hạng người chơi dựa trên tỷ lệ thắng
-        void final_leaderboard_pve(const std::vector<Player>& players);
+        void final_leaderboard_pve(const std::vector<Player>& players, int level_bot);
 
         // Hàm in leaderboard xếp hạng người chơi
         void leaderboard(const std::vector<Player>& players);
@@ -124,7 +124,7 @@ void print_all_player_cards(const std::vector<std::vector<std::string>>& player_
 // Hàm in thông tin người chơi
 void print_player_info(const Player& player) {
     // In thông tin cơ bản của người chơi
-    std::cout << "Player " << player.number << ":\n";
+    std::cout << "Player " << player.number << ":\n" << "Username: " << player.username << "\n";
     std::cout << "Total games played: " << player.total_games << "\n";
     std::cout << "Total wins: " << player.wins << "\n";
     
@@ -145,11 +145,11 @@ void print_player_info(const Player& player) {
 
 
 // Hàm in thông tin chế độ PvE
-void print_pve_info(const Player& player, bool check_bot) {
+void print_pve_info(const Player& player, bool check_bot, int level_bot) {
     if (check_bot) 
     {
     // In thông tin cơ bản của người chơi
-    std::cout << "Bot(super AI version):\n";
+    std::cout << "Bot("<< (level_bot == 1 ? "Normal" : level_bot == 2 ? "Challenge" : "Legendary") <<" version)\n";
     std::cout << "Total games played: " << player.total_games << "\n";
     std::cout << "Total wins: " << player.wins << "\n";
     
@@ -197,7 +197,7 @@ int selectGameLevel() {
 
     // Loop until the user enters a valid level
     while (!isValid) {
-        std::cout << "Select the game difficulty level:\n";
+        std::cout << "Select the Bot difficulty level:\n";
         std::cout << "1. Lv1 - Normal\n";
         std::cout << "2. Lv2 - Challenge\n";
         std::cout << "3. Lv3 - Legendary\n";
@@ -253,7 +253,7 @@ bool check_Yes_No_Input() {
 
 
 // Hàm in leaderboard xếp hạng người chơi dựa trên tỷ lệ thắng
-void leaderboard_pve(const std::vector<Player>& players) 
+void leaderboard_pve(const std::vector<Player>& players, int level_bot) 
 {
     // Tạo bản sao danh sách người chơi để sắp xếp
     std::vector<Player> sorted_players = players;
@@ -264,7 +264,7 @@ void leaderboard_pve(const std::vector<Player>& players)
     });
 
     // In bảng xếp hạng
-    std::cout << "\n======================= LEADERBOARD PVE ========================\n";
+    std::cout << "\n================= LEADERBOARD PVE ("<< (level_bot == 1 ? "Normal" : level_bot == 2 ? "Challenge" : "Legendary") <<" version) ==================\n";
     std::cout << std::left << std::setw(10) << "Rank" 
          << std::setw(15) << "Participant" 
          << std::setw(15) << "Games Played" 
@@ -283,7 +283,7 @@ void leaderboard_pve(const std::vector<Player>& players)
 }
 
 //Hàm in leaderboard cuối cùng xếp hạng người chơi dựa trên tỷ lệ thắng
-void final_leaderboard_pve(const std::vector<Player>& players) 
+void final_leaderboard_pve(const std::vector<Player>& players, int level_bot) 
 {
     // Tạo bản sao danh sách người chơi để sắp xếp
     std::vector<Player> sorted_players = players;
@@ -294,7 +294,7 @@ void final_leaderboard_pve(const std::vector<Player>& players)
     });
 
     // In bảng xếp hạng
-    std::cout << "\n======================= FINAL LEADERBOARD PVE ========================\n";
+    std::cout << "\n============== FINAL LEADERBOARD ("<< (level_bot == 1 ? "Normal" : level_bot == 2 ? "Challenge" : "Legendary") <<" version) ===============\n";
     std::cout << std::left << std::setw(10) << "Rank" 
          << std::setw(15) << "Participant" 
          << std::setw(15) << "Games Played" 

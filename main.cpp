@@ -14,7 +14,7 @@ int main()
 
     std::cout << std::endl;
 
-    // Khởi tạo danh sách người chơi
+    // Khởi tạo danh sách ng1ười chơi
     std::vector<Player> players;
 
     bool continue_game = true;
