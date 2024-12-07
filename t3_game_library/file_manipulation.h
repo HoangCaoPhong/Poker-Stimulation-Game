@@ -66,7 +66,7 @@ void save_game_data_to_file(const std::string& mode, const std::vector<Player>& 
         });
 
         // Lưu bảng xếp hạng vào file
-        outfile << "\n======================== FINAL LEADERBOARD ========================\n";
+        outfile << "\n================================= FINAL LEADERBOARD ===================================\n";
         outfile << std::left << std::setw(10) << "Rank" 
                 << std::setw(15) << "Player No." 
                 << std::setw(20) << "Username" 
@@ -83,7 +83,7 @@ void save_game_data_to_file(const std::string& mode, const std::vector<Player>& 
                     << std::setw(10) << player.wins 
                     << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
         }
-        outfile << "===================================================================\n\n\n";
+        outfile << "========================================================================================\n\n\n";
 
         outfile.close();
     

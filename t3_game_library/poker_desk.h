@@ -325,7 +325,7 @@ void leaderboard(const std::vector<Player>& players)
     });
 
     // In bảng xếp hạng
-    std::cout << "\n=================================== LEADERBOARD ======================================" << std::endl;
+    std::cout << "\n=================================== LEADERBOARD ======================================\n";
     std::cout << std::left 
               << std::setw(10) << "Rank" 
               << std::setw(15) << "Player No." 
@@ -344,7 +344,7 @@ void leaderboard(const std::vector<Player>& players)
                   << std::setw(10) << player.wins 
                   << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
     }
-    std::cout << "=================================================================================\n";
+    std::cout << "=======================================================================================\n";
 }
 
 // Hàm in leaderboard cuối cùng xếp hạng người chơi dựa trên tỷ lệ thắng
@@ -359,7 +359,7 @@ void final_leaderboard(const std::vector<Player>& players)
     });
 
     // In bảng xếp hạng
-    std::cout << "\n================================ FINAL LEADERBOARD ================================" << std::endl;
+    std::cout << "\n================================= FINAL LEADERBOARD ===================================\n";
     std::cout << std::left 
               << std::setw(10) << "Rank" 
               << std::setw(15) << "Player No." 
@@ -378,7 +378,7 @@ void final_leaderboard(const std::vector<Player>& players)
                   << std::setw(10) << player.wins 
                   << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
     }
-    std::cout << "=============================================================================\n";
+    std::cout << "========================================================================================\n";
 }
 
 //Hỏi người chơi có muốn chọn chế độ chơi lại không
