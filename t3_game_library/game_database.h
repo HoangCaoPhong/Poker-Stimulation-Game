@@ -26,14 +26,15 @@
 
     //Cấu trúc dữ liệu người chơi
     struct Player {
-        int number;  // Player's number (1-based index)
-        int total_games = 0;  // Total games played
-        int wins = 0;  // Total wins
-        float win_rate = 0.0;  // Win rate in percentage
-        std::map<std::string, int> win_situations; // Track win types (card value & suit)
+        int number;  
+        std::string username;
+        int total_games = 0;  
+        int wins = 0;  
+        float win_rate = 0.0;  
+        std::map<std::string, int> win_situations; 
     };
 
-    // Hàm khởi tạo người chơi
+    // Hàm khởi tạo người chơi 
     Player create_player(int player_number) {
         Player p;
         p.number = player_number;
@@ -44,14 +45,25 @@
         return p;
     }
 
-    // Enums for suits
+    // Hàm khởi tạo người chơi trong chế độ Poker PvE
+    Player create_player_Poker_PvE_mode(int player_number) {
+        Player p;
+        p.number = player_number;
+        p.total_games = 0;
+        p.wins = 0;
+        p.win_rate = 0.0;
+        // Khởi tạo thêm các giá trị khác nếu cần
+        return p;
+    }
+
+    // Enum để lưu chất của lá bài
     enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES };
 
     // Struct for representing a card
     struct Card 
     {
-        int value;  // 2-14 (where 11 = J, 12 = Q, 13 = K, 14 = A)
-        Suit suit;  // Suit enumeration
+        int value;  //lưu giá trị của lá bài
+        Suit suit;  //lưu chất của lá bài
     };
     
 

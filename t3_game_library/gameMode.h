@@ -560,7 +560,7 @@ void run_poker_pvp_mode()
     // In thông tin người chơi sau khi cập nhật
     final_leaderboard(players);
 
-    save_game_data_to_file_poker_PvE_mode("Poker PvP mode", players);
+    save_game_data_to_file("Poker PvP mode", players);
 }
 
 //hàm tạo số ngẫu nhiên từ 1 đến 10
@@ -676,7 +676,7 @@ void run_poker_pve_mode()
     // Display final leaderboard
     final_leaderboard_pve(players);
 
-    save_game_data_to_file("Poker PvE mode", players);
+    save_game_data_to_file_poker_PvE_mode("Poker PvE mode", players);
 }
 
 
