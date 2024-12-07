@@ -1,0 +1,60 @@
+Game Mode: Three Card Poker
+Players: 
+Player #1
+Username: n
+Total Games: 3
+Wins: 2
+Win Rate: 66.6667%
+Win Situations: 
+  Tied with score: 4: 1 times
+  Won with score: 7: 1 times
+-------------------------
+Player #2
+Username: n
+Total Games: 3
+Wins: 2
+Win Rate: 66.6667%
+Win Situations: 
+  Tied with score: 4: 1 times
+  Won with score: 9: 1 times
+-------------------------
+Player #3
+Username: n
+Total Games: 3
+Wins: 0
+Win Rate: 0%
+Win Situations: 
+-------------------------
+
+================================= FINAL LEADERBOARD ===================================
+Rank      Player No.     Username            Games Played   Wins      Win Rate (%)
+1         1              n                   3              2         66.67       
+2         2              n                   3              2         66.67       
+3         3              n                   3              0         0.00        
+========================================================================================
+
+
+Game Mode: Poker PvE mode
+Players: 
+Bot(Legendary version):
+  Total Games: 1
+  Wins: 1
+  Win Rate: 100.00%
+  Win Situations:
+    High Card: 1 wins
+-------------------------
+Bot(Legendary version):
+  Total Games: 1
+  Wins: 0
+  Win Rate: 0.00%
+  Win Situations:
+    No winning situations recorded.
+-------------------------
+
+================= LEADERBOARD PVE (Legendary version) ==================
+Rank      Participant    Games Played   Wins      Win Rate (%)
+1         Bot            1              1         100.00      
+2         Player         1              0         0.00        
+===================================================================
+
+

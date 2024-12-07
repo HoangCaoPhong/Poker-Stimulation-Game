@@ -466,50 +466,99 @@ bool ask_to_continue() {
 // Function to print the PvP mode guide
 void printPvPGuide() {
     setTextColor(6); // Set color to Cyan
-    std::cout << "=== PvP Mode (Player vs. Player) Guide ===\n";
+    std::cout << "=== PvP (Player vs. Player) Poker Mode ===\n\n";
+
     std::cout << "Description:\n";
-    std::cout << "  + PvP mode allows two players to compete directly against each other.\n";
-    std::cout << "    Each player takes turns to play their move.\n\n";
+    std::cout << "  + The PvP mode allows two players to compete directly against each other. Each player will take turns during their play.\n\n";
 
     std::cout << "Instructions:\n";
-    std::cout << "  + When entering PvP mode, enter the number of players (from 2 to 10).\n";
-    std::cout << "  + The computer will randomly distribute cards to each player.\n";
-    std::cout << "  + The computer will automatically calculate and find the strongest hand for each player.\n";
+    std::cout << "  + When entering PvP mode, input the number of players participating (from 2 to 10).\n";
+    std::cout << "  + Enter the usernames of the players.\n";
+    std::cout << "  + The computer will randomly deal cards to each player.\n";
+    std::cout << "  + The computer will automatically evaluate and determine the strongest hand for each player and display it on the screen.\n";
     std::cout << "  + The computer will automatically determine the winner.\n";
-    std::cout << "  + Players with the strongest hand will win and receive 1 point.\n";
-    std::cout << "  + The computer will automatically update the players' information.\n";
-    std::cout << "  + The computer will display the current round's Leaderboard sorted by win rate.\n";
-    std::cout << "  + The game has no limit on the number of rounds.\n";
-    std::cout << "  + The game ends when players decide to stop playing.\n";
-    std::cout << "  + The computer will display the final Leaderboard.\n\n";
+    std::cout << "  + Players who have or share the strongest hand will win and receive 1 point.\n";
+    std::cout << "  + The computer will automatically update player information.\n";
+    std::cout << "  + The computer will display the current round Leaderboard, sorted by win rate.\n";
+    std::cout << "  + The game does not limit the number of rounds.\n";
+    std::cout << "  + The game ends when the participants decide to stop playing.\n";
+    std::cout << "  + The computer will display the final Leaderboard on the screen.\n";
+    std::cout << "  + The computer will save the match data, including player information and the final Leaderboard, into the file Data_Game.txt.\n\n";
+
+    std::cout << "Rules for Determining Hands:\n";
+    std::cout << "  1. The program will randomly deal 5 cards to each participant.\n\n";
+
+    std::cout << "  2. The card rankings are as follows:\n";
+    std::cout << "     2 < 3 < 4 < 5 < 6 < 7 < 8 < 9 < 10 < J < Q < K < A.\n\n";
+
+    std::cout << "  3. The program evaluates the participants’ hands in the following order, from highest to lowest:\n\n";
+
+    std::cout << "     | Rank | Hand Type         | Description                                   |\n";
+    std::cout << "     |------|-------------------|-----------------------------------------------|\n";
+    std::cout << "     | 1    | Straight Flush    | 5 consecutive cards of the same suit.        |\n";
+    std::cout << "     | 2    | Four of a Kind    | 4 cards of the same rank.                    |\n";
+    std::cout << "     | 3    | Full House        | 3 cards of the same rank and a pair.         |\n";
+    std::cout << "     | 4    | Flush             | 5 cards of the same suit but not consecutive.|\n";
+    std::cout << "     | 5    | Straight          | 5 consecutive cards, not necessarily suited. |\n";
+    std::cout << "     | 6    | Three of a Kind   | 3 cards of the same rank.                    |\n";
+    std::cout << "     | 7    | Two Pairs         | Two pairs of cards with different ranks.     |\n";
+    std::cout << "     | 8    | One Pair          | A single pair of cards with the same rank.   |\n";
+    std::cout << "     | 9    | High Card         | The highest-value card in the hand.          |\n\n";
+
+    std::cout << "  4. Suits are not considered (only the rank of the cards matters).\n\n";
+
+    std::cout << "  5. The player with the highest-ranked hand wins the match.\n";
     setTextColor(0); // Reset color
 }
 
 // Function to print the PvE mode guide
 void printPvEGuide() {
     setTextColor(6); // Set color to Cyan
-    std::cout << "=== PvE Mode (Player vs. Environment) Guide ===\n";
+    std::cout << "=== PvE (Player vs. T3 Super AI) Poker Mode ===\n\n";
+
     std::cout << "Description:\n";
-    std::cout << "  + PvE mode allows a player to compete against the computer (AI/Bot) designed by the Triple_Star team.\n";
-    std::cout << "    This is a great way to practice or have fun without a human opponent.\n\n";
+    std::cout << "  + PvE mode allows players to face off against a computer (AI/Bot) designed by the Triple_Star team.\n";
+    std::cout << "  + This is a great way to practice or have fun when no real opponent is available.\n\n";
 
     std::cout << "Instructions:\n";
-    std::cout << "  + When entering PvE mode, the player will be asked to select the bot difficulty level:\n";
-    std::cout << "      Lv1 - Normal: Basic difficulty, the bot plays like a regular player.\n";
-    std::cout << "                    (Bot win rate: ~60%)\n";
-    std::cout << "      Lv2 - Challenge: Challenging difficulty, the bot plays at an expert level.\n";
-    std::cout << "                    (Bot win rate: ~70%)\n";
-    std::cout << "      Lv3 - Legendary: Extremely high difficulty, the bot plays like a Poker champion.\n";
-    std::cout << "                    (Bot win rate: ~80%)\n";
-    std::cout << "  + The computer will randomly distribute cards.\n";
-    std::cout << "  + The computer will automatically calculate and find the strongest hands for both the bot and the player, then display them.\n";
+    std::cout << "  + When entering PvE mode, the player will be prompted to choose the bot difficulty level:\n";
+    std::cout << "      Lv1 - Normal: Basic difficulty, the bot plays like a regular player (Bot's win rate: ~60%).\n";
+    std::cout << "      Lv2 - Challenge: Challenging difficulty, the bot plays at the level of an expert (Bot's win rate: ~70%).\n";
+    std::cout << "      Lv3 - Legendary: Very high difficulty, the bot plays like a poker champion (Bot's win rate: ~80%).\n";
+    std::cout << "  + The computer will randomly deal the cards.\n";
+    std::cout << "  + The computer will automatically calculate and determine the strongest hand for both the Bot and the player, then display it on the screen.\n";
     std::cout << "  + The computer will automatically determine the winner.\n";
-    std::cout << "  + Whoever has the strongest hand wins and receives 1 point.\n";
-    std::cout << "  + The computer will automatically update the player's information.\n";
-    std::cout << "  + The computer will display the current round's Leaderboard sorted by win rate.\n";
-    std::cout << "  + The game has no limit on the number of rounds.\n";
-    std::cout << "  + The game ends when the player decides to stop playing.\n";
-    std::cout << "  + The computer will display the final Leaderboard.\n\n";
+    std::cout << "  + The winner, or those who tie with the strongest hand, will earn 1 point.\n";
+    std::cout << "  + The computer will automatically update player and Bot information.\n";
+    std::cout << "  + The computer will display the current round's Leaderboard, sorted by win rate.\n";
+    std::cout << "  + The game does not limit the number of rounds.\n";
+    std::cout << "  + The game ends when the participant decides to stop playing.\n";
+    std::cout << "  + The computer will display the final Leaderboard on the screen.\n";
+    std::cout << "  + The computer will save match data, including player information and the final Leaderboard, to the file Data_Game.txt.\n\n";
+
+    std::cout << "Rules for Determining Hands:\n";
+    std::cout << "  1. The program will randomly deal 5 cards to each participant.\n\n";
+
+    std::cout << "  2. The card rankings are as follows:\n";
+    std::cout << "     2 < 3 < 4 < 5 < 6 < 7 < 8 < 9 < 10 < J < Q < K < A.\n\n";
+
+    std::cout << "  3. The program evaluates the participants’ hands in the following order, from highest to lowest:\n\n";
+
+    std::cout << "     | Rank | Hand Type         | Description                                   |\n";
+    std::cout << "     |------|-------------------|-----------------------------------------------|\n";
+    std::cout << "     | 1    | Straight Flush    | 5 consecutive cards of the same suit.        |\n";
+    std::cout << "     | 2    | Four of a Kind    | 4 cards of the same rank.                    |\n";
+    std::cout << "     | 3    | Full House        | 3 cards of the same rank and a pair.         |\n";
+    std::cout << "     | 4    | Flush             | 5 cards of the same suit but not consecutive.|\n";
+    std::cout << "     | 5    | Straight          | 5 consecutive cards, not necessarily suited. |\n";
+    std::cout << "     | 6    | Three of a Kind   | 3 cards of the same rank.                    |\n";
+    std::cout << "     | 7    | Two Pairs         | Two pairs of cards with different ranks.     |\n";
+    std::cout << "     | 8    | One Pair          | A single pair of cards with the same rank.   |\n";
+    std::cout << "     | 9    | High Card         | The highest-value card in the hand.          |\n\n";
+
+    std::cout << "  4. Suits are not considered (only the rank of the cards matters).\n\n";
+
+    std::cout << "  5. The player with the highest-ranked hand wins the match.\n";
     setTextColor(0); // reset color
 }
 
@@ -583,70 +632,81 @@ void printASCIIArt() {
 void printSingleCardDuelGuide()
 {   
     setTextColor(6); // Set color to Cyan
-    std::cout << "\nSingle Card Duel:\n\n";
+    std::cout << "=== Single Card Duel Mode ===\n\n";
 
-    std::cout << "    Description:\n";
-    std::cout << "        + Single Card Duel mode allows two players to compete directly.\n";
-    std::cout << "        + Each player will receive 1 card.\n";
-    std::cout << "        + The player(s) with the strongest card will win the round.\n\n";
+    std::cout << "Description:\n";
+    std::cout << "  + Single Card Duel mode allows multiple players to compete directly.\n";
+    std::cout << "  + Each player is dealt one card.\n";
+    std::cout << "  + A simple and quick gameplay mode.\n\n";
 
-    std::cout << "    Gameplay Instructions:\n";
-    std::cout << "        + Enter the number of players:\n";
-    std::cout << "            At the start of PvP mode, players enter the number of participants (from 2 to 10).\n";
-    std::cout << "        + Random card distribution:\n";
-    std::cout << "            The system will randomly deal a card to each player.\n";
-    std::cout << "        + After the cards are dealt:\n";
-    std::cout << "            The system will determine the strongest card and display the result.\n";
-    std::cout << "        + Players with the strongest card will win the round and receive 1 point.\n";
-    std::cout << "        + If multiple players have the strongest card, they will all receive 1 point.\n";
-    std::cout << "        + The system will automatically update player scores after each round.\n";
-    std::cout << "        + A temporary Leaderboard will be displayed, sorted by win rate, to track progress.\n";
-    std::cout << "        + Unlimited rounds:\n";
-    std::cout << "            The game continues until players decide to stop.\n";
-    std::cout << "        + At the end of the game:\n";
-    std::cout << "            The system will display the final Leaderboard with overall results.\n\n";
+    std::cout << "Instructions:\n";
+    std::cout << "  + Enter the number of players:\n";
+    std::cout << "    - At the start of the mode, players input the number of participants (from 2 to 10).\n";
+    std::cout << "  + Random card dealing:\n";
+    std::cout << "    - The computer will randomly deal one card to each player.\n";
+    std::cout << "  + Scoring and winner determination:\n";
+    std::cout << "    - After the cards are dealt, the computer determines the maximum score for each player and displays the results.\n";
+    std::cout << "    - The player with the highest score wins the round and earns 1 point.\n";
+    std::cout << "    - If multiple players have the same highest score, all of them earn 1 point.\n";
+    std::cout << "  + Automatic updates:\n";
+    std::cout << "    - The computer automatically updates the players' scores after each round.\n";
+    std::cout << "  + Leaderboard:\n";
+    std::cout << "    - A temporary leaderboard sorted by win rate is displayed for players to track progress.\n";
+    std::cout << "  + Unlimited rounds:\n";
+    std::cout << "    - The game does not limit the number of rounds.\n";
+    std::cout << "  + End of game:\n";
+    std::cout << "    - When the game ends, the computer prints the final leaderboard, showing the results of the entire match.\n\n";
 
-    std::cout << "    Card Comparison Rules:\n";
-    std::cout << "        + Standard 52-card deck.\n";
-    std::cout << "        + Higher card ranks follow the order: 2 < 3 < ... < 10 < J < Q < K < A.\n";
-    std::cout << "        + If two cards have the same rank:\n";
-    std::cout << "            Suit comparison applies: Spades (♠) > Hearts (♥) > Diamonds (♦) > Clubs (♣).\n";
+    std::cout << "Rules for Determining the Winning Card:\n";
+    std::cout << "  1. Ranks (values) are ordered from 2 (lowest) to A (highest):\n";
+    std::cout << "     2 < 3 < 4 < 5 < 6 < 7 < 8 < 9 < 10 < J < Q < K < A.\n";
+    std::cout << "  2. Suits are ranked as follows:\n";
+    std::cout << "     Hearts > Diamonds > Clubs > Spades.\n";
+    std::cout << "  3. Winner determination:\n";
+    std::cout << "     - The player with the card of the highest rank wins.\n";
+    std::cout << "     - If two or more players have cards of the same rank, the suit is considered to break the tie:\n";
+    std::cout << "       The card with the higher suit wins.\n\n";
     setTextColor(0); // Reset color
 }
 
 // Print the Three Card Poker mode guide
 void printThreeCardPokerGuide() {
     setTextColor(6); // Set color to Cyan
-    std::cout << "Three Card Poker Guide\n";
-    std::cout << "========================\n\n";
+       std::cout << "=== Three Card Poker Mode ===\n\n";
 
     std::cout << "Description:\n";
-    std::cout << "+ The Three_Card_Poker mode allows multiple players to compete directly.\n";
-    std::cout << "+ Each player will receive 3 cards.\n";
-    std::cout << "+ Use the deck from A (Ace) to K for calculation.\n";
-    std::cout << "+ Whoever has the strongest hand will win.\n\n";
+    std::cout << "  + Three Card Poker mode allows multiple players to compete directly.\n";
+    std::cout << "  + Each player is dealt three cards.\n";
+    std::cout << "  + Players with the strongest hand will win.\n\n";
 
-    std::cout << "Instructions for Playing:\n";
-    std::cout << "+ Enter the number of players (2 to 10).\n";
-    std::cout << "+ When starting the mode, input the number of participants.\n";
-    std::cout << "+ Randomly deal cards: The computer will randomly deal 3 cards to each player.\n";
-    std::cout << "+ After the cards are dealt, the computer will calculate the score for each player and display the results.\n";
-    std::cout << "+ The player with the highest score will win the round and receive 1 point.\n";
-    std::cout << "+ If multiple players have the same highest score, all will receive 1 point.\n";
-    std::cout << "+ The computer automatically updates the player's score after each round.\n";
-    std::cout << "+ Display the temporary leaderboard, sorted by win rate, to track progress.\n";
-    std::cout << "+ The game has no round limit.\n";
-    std::cout << "+ When the game ends, the final leaderboard will be printed, showing the results of all matches.\n\n";
+    std::cout << "Instructions:\n";
+    std::cout << "  + Enter the number of players:\n";
+    std::cout << "    - At the start of the mode, players input the number of participants (from 2 to 10).\n";
+    std::cout << "  + Random card dealing:\n";
+    std::cout << "    - The computer will randomly deal three cards to each player.\n";
+    std::cout << "  + Scoring and winner determination:\n";
+    std::cout << "    - After the cards are dealt, the computer calculates the maximum score for each player and displays the results.\n";
+    std::cout << "    - The player with the highest score wins the round and earns 1 point.\n";
+    std::cout << "    - If multiple players have the same highest score, all of them earn 1 point.\n";
+    std::cout << "  + Automatic updates:\n";
+    std::cout << "    - The computer automatically updates the players' scores after each round.\n";
+    std::cout << "  + Leaderboard:\n";
+    std::cout << "    - A temporary leaderboard sorted by win rate is displayed for players to track progress.\n";
+    std::cout << "  + Unlimited rounds:\n";
+    std::cout << "    - The game does not limit the number of rounds.\n";
+    std::cout << "  + End of game:\n";
+    std::cout << "    - When the game ends, the computer prints the final leaderboard, showing the results of the entire match.\n\n";
 
-    std::cout << "Comparison Rules:\n";
-    std::cout << "+ Standard deck (52 cards).\n";
-    std::cout << "+ Card values:\n";
-    std::cout << "  - A (Ace) = 1 point.\n";
-    std::cout << "  - Cards from 2 to 9 keep their numeric value.\n";
-    std::cout << "  - 10, J, Q, K = 10 points.\n";
-    std::cout << "+ Sum the points of 3 cards.\n";
-    std::cout << "+ Only take the unit digit (e.g., total 18 -> actual score 8).\n";
-    std::cout << "+ Maximum score: 9 points.\n";
+    std::cout << "Rules for Scoring Hands:\n";
+    std::cout << "  1. Standard 52-card deck is used.\n";
+    std::cout << "  2. Card values:\n";
+    std::cout << "     - A (Ace) = 1 point.\n";
+    std::cout << "     - Cards 2 to 9 retain their face value.\n";
+    std::cout << "     - 10, J, Q, K are worth 10 points.\n";
+    std::cout << "  3. Total points of three cards:\n";
+    std::cout << "     - Only the unit digit of the total is considered.\n";
+    std::cout << "       For example: If the total is 18, the actual score is 8.\n";
+    std::cout << "  4. Maximum score is 9.\n\n";
     setTextColor(0); // Reset color
 }
 

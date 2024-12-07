@@ -43,7 +43,7 @@
     void calculate_player_points(int number_player, const std::vector<std::vector<std::string>>& player_cards, int ranks[], int suits[], std::vector<int> &player_value_card_points, std::vector<int> &player_rank_points, bool check_print, bool pve_mode);
 
     // Xác định người chiến thắng trong chế độ PvE
-    void determine_winner_PvE(int number_player, std::vector<int>& player_value_card_points, std::vector<int>& player_rank_points, std::vector<Player>& players);
+    void determine_winner_pve(int number_player, std::vector<int>& player_value_card_points, std::vector<int>& player_rank_points, std::vector<Player>& players);
 
 //...................................................................................................................................................................................................................................................................................................
 //Chế độ Single Card Duel
