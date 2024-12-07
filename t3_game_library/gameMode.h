@@ -504,6 +504,7 @@ void run_poker_pvp_mode()
     {
         // Hàm in hướng dẫn chơi chế độ PvP
         printPvPGuide();
+
     }
     std::cout << std::endl;
 
@@ -986,12 +987,14 @@ void run_Three_Card_Poker() {
     // In thông tin người chơi sau khi chơi xong
     final_leaderboard(players);
 
+    // Lưu thông tin người chơi vào file
     save_game_data_to_file("Three Card Poker", players);
 }
 
 // Hàm chia bài cho chế độ Three Card Poker
 std::vector<std::vector<std::string>> deal_cards_Three_Card_Poker(std::vector<std::string>& shuffled_pack, int number_player) {
-    std::vector<std::vector<std::string>> player_cards(number_player);  // Mảng 2 chiều chứa bài của từng người chơi
+    // Mảng 2 chiều chứa bài của từng người chơi
+    std::vector<std::vector<std::string>> player_cards(number_player);  
     
     // Mỗi người chơi sẽ nhận 3 lá bài
     int card_index = 0;
@@ -1025,12 +1028,6 @@ int calculate_player_score_Three_Card_Poker(std::vector<std::string>& player_car
     return score % 10;  // Chỉ lấy chữ số hàng đơn vị
 }
 
-// Function to calculate player score for Three Card Poker (you should implement this function)
-int calculate_player_score_Three_Card_Poker(const std::vector<std::string>& cards) {
-    // Implement the logic for calculating the score based on the Three Card Poker rules
-    // For now, assume a dummy score calculation (this needs to be adjusted)
-    return rand() % 10 + 1;  // Random score for testing
-}
 
 // Function to determine the winners in Three Card Poker mode
 std::vector<int> determine_winners_Three_Card_Poker(std::vector<Player>& players, std::vector<std::vector<std::string>>& player_cards) {
@@ -1038,7 +1035,7 @@ std::vector<int> determine_winners_Three_Card_Poker(std::vector<Player>& players
     std::vector<int> player_scores(players.size());
     enum Suit { Clubs, Diamonds, Hearts, Spades };
 
-    // Map card values and suits to strings (for printing the card details)
+    // Map card values and suits to strings for printing
     std::map<int, std::string> value_names = {{2, "2"}, {3, "3"}, {4, "4"}, {5, "5"}, {6, "6"}, {7, "7"}, {8, "8"},
                                     {9, "9"}, {10, "10"}, {11, "J"}, {12, "Q"}, {13, "K"}, {14, "A"}};
     std::map<int, std::string> suit_names = {{Clubs, "Clubs"}, {Diamonds, "Diamonds"}, {Hearts, "Hearts"}, {Spades, "Spades"}};
