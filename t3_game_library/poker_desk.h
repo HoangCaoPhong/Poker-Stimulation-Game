@@ -487,6 +487,7 @@ void printPvPGuide() {
 
 // Function to print the PvE mode guide
 void printPvEGuide() {
+    setTextColor(6); // Set color to Cyan
     std::cout << "=== PvE Mode (Player vs. Environment) Guide ===\n";
     std::cout << "Description:\n";
     std::cout << "  + PvE mode allows a player to compete against the computer (AI/Bot) designed by the Triple_Star team.\n";
@@ -509,6 +510,7 @@ void printPvEGuide() {
     std::cout << "  + The game has no limit on the number of rounds.\n";
     std::cout << "  + The game ends when the player decides to stop playing.\n";
     std::cout << "  + The computer will display the final Leaderboard.\n\n";
+    setTextColor(0); // reset color
 }
 
 // Print ASCII Art Poker
