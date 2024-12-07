@@ -79,30 +79,47 @@
 
 
 //====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-// Hàm chọn chế độ chơi 
+// Hàm chọn chế độ chơi với cơ chế chống nhập sai
 void select_game_mode(std::vector<Player>& players) {
     int mode_choice;
-    std::cout << "Choose game mode: " << std::endl;
+    bool valid_choice;
+
+    std::cout << "\nChoose game mode: " << std::endl;
     std::cout << "1. PVP: Player vs Player" << std::endl;
     std::cout << "2. PVE: Player vs Bot" << std::endl;
     std::cout << "3. Single Card Duel" << std::endl;
-    std::cout << "4. Three Card Poker" << std::endl; // Added option for Three Card Poker
+    std::cout << "4. Three Card Poker" << std::endl;
     std::cout << "Enter your choice (1, 2, 3, 4): ";
-    std::cin >> mode_choice;
+    
+    //Chống nhập sai
+    do {
+        std::cin >> mode_choice;
 
-    if (mode_choice == 2) {
-        // Nếu chọn PVE, khởi tạo một Bot (số lượng người chơi + 1)
-        players.push_back(create_player(2)); // Tạo Bot
-        run_poker_pve_mode();
-    } else if (mode_choice == 1) {
-        run_poker_pvp_mode();
-    } else if (mode_choice == 3) {
-        run_Single_Card_Duel();
-    } else if (mode_choice == 4) {
-        run_Three_Card_Poker(); // Added call for Three Card Poker
-    } else {
-        std::cout << "Invalid choice. Please choose 1, 2, 3, or 4.\n";
-        select_game_mode(players); // Gọi lại nếu chọn sai
+        // Kiểm tra nếu đầu vào không hợp lệ hoặc không nằm trong phạm vi
+        if (std::cin.fail() || mode_choice < 1 || mode_choice > 4) {
+            std::cout << "Invalid choice. Please enter a number between 1 and 4." << std::endl;
+            std::cin.clear(); // Xóa trạng thái lỗi của cin
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Bỏ qua đầu vào không hợp lệ
+            valid_choice = false;
+        } else {
+            valid_choice = true;
+        }
+    } while (!valid_choice);
+
+    // Xử lý lựa chọn hợp lệ
+    switch (mode_choice) {
+        case 1:
+            run_poker_pvp_mode();
+            break;
+        case 2:
+            run_poker_pve_mode();
+            break;
+        case 3:
+            run_Single_Card_Duel();
+            break;
+        case 4:
+            run_Three_Card_Poker();
+            break;
     }
 }
 
@@ -680,7 +697,7 @@ void run_poker_pve_mode()
     // Display final leaderboard
     final_leaderboard_pve(players, level_bot);
 
-    save_game_data_to_file_poker_PvE_mode("Poker PvE mode", players);
+    save_game_data_to_file_poker_PvE_mode("Poker PvE mode", players, level_bot);
 }
 
 
@@ -707,6 +724,7 @@ void run_Single_Card_Duel() {
     std::vector<Player> players(number_player);
 
     // khởi tạo các người chơi mặc định
+    std::cin.get();
     for (int i = 0; i < number_player; ++i) {
         players[i] = create_player(i + 1);
     }
@@ -908,6 +926,7 @@ void run_Three_Card_Poker() {
     std::vector<Player> players(number_player);
 
     // Khởi tạo các người chơi mặc định
+    std::cin.get();
     for (int i = 0; i < number_player; ++i) {
         players[i] = create_player(i + 1);
     }

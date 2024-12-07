@@ -43,7 +43,7 @@
         void print_player_info(const Player& player);
 
         // Hàm in thông tin chế độ PvE
-        void print_pve_info(const Player& player, bool check_bot);
+        void print_pve_info(const Player& player, bool check_bot, int level_bot);
 
         // Hàm in leaderboard (PvE) xếp hạng người chơi dựa trên tỷ lệ thắng
         void leaderboard_pve(const std::vector<Player>& players, int level_bot);
@@ -325,25 +325,29 @@ void leaderboard(const std::vector<Player>& players)
     });
 
     // In bảng xếp hạng
-     std::cout << "\n=========================== LEADERBOARD ==============================\n";
-    std::cout << std::left << std::setw(10) << "Rank" 
-         << std::setw(15) << "Player No." 
-         << std::setw(15) << "Games Played" 
-         << std::setw(10) << "Wins" 
-         << std::setw(12) << "Win Rate (%)" << std::endl;
+    std::cout << "\n=================================== LEADERBOARD ======================================" << std::endl;
+    std::cout << std::left 
+              << std::setw(10) << "Rank" 
+              << std::setw(15) << "Player No." 
+              << std::setw(20) << "Username" 
+              << std::setw(15) << "Games Played" 
+              << std::setw(10) << "Wins" 
+              << std::setw(12) << "Win Rate (%)" << std::endl;
 
     for (size_t i = 0; i < sorted_players.size(); ++i) {
         const Player& player = sorted_players[i];
-        std::cout << std::left << std::setw(10) << (i + 1) 
-             << std::setw(15) << player.number 
-             << std::setw(15) << player.total_games 
-             << std::setw(10) << player.wins 
-             << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
+        std::cout << std::left 
+                  << std::setw(10) << (i + 1) 
+                  << std::setw(15) << player.number 
+                  << std::setw(20) << player.username 
+                  << std::setw(15) << player.total_games 
+                  << std::setw(10) << player.wins 
+                  << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
     }
-    std::cout << "=======================================================================\n";
+    std::cout << "=================================================================================\n";
 }
 
-//Hàm in leaderboard cuối cùng xếp hạng người chơi dựa trên tỷ lệ thắng
+// Hàm in leaderboard cuối cùng xếp hạng người chơi dựa trên tỷ lệ thắng
 void final_leaderboard(const std::vector<Player>& players) 
 {
     // Tạo bản sao danh sách người chơi để sắp xếp
@@ -355,22 +359,26 @@ void final_leaderboard(const std::vector<Player>& players)
     });
 
     // In bảng xếp hạng
-    std::cout << "\n======================== FINAL LEADERBOARD ========================\n";
-    std::cout << std::left << std::setw(10) << "Rank" 
-         << std::setw(15) << "Player No." 
-         << std::setw(15) << "Games Played" 
-         << std::setw(10) << "Wins" 
-         << std::setw(12) << "Win Rate (%)" << std::endl;
+    std::cout << "\n================================ FINAL LEADERBOARD ================================" << std::endl;
+    std::cout << std::left 
+              << std::setw(10) << "Rank" 
+              << std::setw(15) << "Player No." 
+              << std::setw(20) << "Username" 
+              << std::setw(15) << "Games Played" 
+              << std::setw(10) << "Wins" 
+              << std::setw(12) << "Win Rate (%)" << std::endl;
 
     for (size_t i = 0; i < sorted_players.size(); ++i) {
         const Player& player = sorted_players[i];
-        std::cout << std::left << std::setw(10) << (i + 1) 
-             << std::setw(15) << player.number 
-             << std::setw(15) << player.total_games 
-             << std::setw(10) << player.wins 
-             << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
+        std::cout << std::left 
+                  << std::setw(10) << (i + 1) 
+                  << std::setw(15) << player.number 
+                  << std::setw(20) << player.username 
+                  << std::setw(15) << player.total_games 
+                  << std::setw(10) << player.wins 
+                  << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
     }
-    std::cout << "===================================================================\n";
+    std::cout << "=============================================================================\n";
 }
 
 //Hỏi người chơi có muốn chọn chế độ chơi lại không

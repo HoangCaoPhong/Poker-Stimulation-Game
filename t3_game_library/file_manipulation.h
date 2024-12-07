@@ -17,7 +17,7 @@
 
 
     // Hàm lưu dữ liệu trò chơi vào file cho chế độ Poker PvE
-    void save_game_data_to_file_poker_PvE_mode(const std::string& mode, const std::vector<Player>& players);
+    void save_game_data_to_file_poker_PvE_mode(const std::string& mode, const std::vector<Player>& players, int level_bot);
     
 
 //====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
@@ -31,7 +31,6 @@ void clear_file() {
         std::cout << "Unable to open file for clearing." << std::endl;
     }
 }
-
 // Hàm lưu dữ liệu trò chơi vào file và hiển thị bảng xếp hạng
 void save_game_data_to_file(const std::string& mode, const std::vector<Player>& players) {
     // Tạo một file game_data.txt để lưu dữ liệu
@@ -45,6 +44,7 @@ void save_game_data_to_file(const std::string& mode, const std::vector<Player>& 
         outfile << "Players: " << std::endl;
         for (const auto& player : players) {
             outfile << "Player #" << player.number << std::endl;
+            outfile << "Username: " << player.username << std::endl;
             outfile << "Total Games: " << player.total_games << std::endl;
             outfile << "Wins: " << player.wins << std::endl;
             outfile << "Win Rate: " << player.win_rate << "%" << std::endl;
@@ -69,6 +69,7 @@ void save_game_data_to_file(const std::string& mode, const std::vector<Player>& 
         outfile << "\n======================== FINAL LEADERBOARD ========================\n";
         outfile << std::left << std::setw(10) << "Rank" 
                 << std::setw(15) << "Player No." 
+                << std::setw(20) << "Username" 
                 << std::setw(15) << "Games Played" 
                 << std::setw(10) << "Wins" 
                 << std::setw(12) << "Win Rate (%)" << std::endl;
@@ -77,6 +78,7 @@ void save_game_data_to_file(const std::string& mode, const std::vector<Player>& 
             const Player& player = sorted_players[i];
             outfile << std::left << std::setw(10) << (i + 1) 
                     << std::setw(15) << player.number 
+                    << std::setw(20) << player.username 
                     << std::setw(15) << player.total_games 
                     << std::setw(10) << player.wins 
                     << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
@@ -90,8 +92,9 @@ void save_game_data_to_file(const std::string& mode, const std::vector<Player>& 
     }
 }
 
+
 // Hàm lưu dữ liệu trò chơi vào file cho chế độ Poker PvE
-void save_game_data_to_file_poker_PvE_mode(const std::string& mode, const std::vector<Player>& players) {
+void save_game_data_to_file_poker_PvE_mode(const std::string& mode, const std::vector<Player>& players, int level_bot) {
     // Tạo file để lưu dữ liệu
     std::ofstream outfile("Data_Game.txt", std::ios::app); // Mở file ở chế độ thêm (append)
 
@@ -102,7 +105,7 @@ void save_game_data_to_file_poker_PvE_mode(const std::string& mode, const std::v
         // Lưu thông tin từng người chơi
         outfile << "Players: " << std::endl;
         for (const auto& player : players) {
-            std::string participant = (player.number == 1) ? "Bot" : "Player ";
+            std::string participant = (player.number == 0) ? "Player " : (level_bot == 1 ? "Bot(Normal version)" : level_bot == 2 ? "Bot(Challenge version)" : "Bot(Legendary version)");
 
             outfile << participant << ":" << std::endl;
             outfile << "  Total Games: " << player.total_games << std::endl;
@@ -128,7 +131,7 @@ void save_game_data_to_file_poker_PvE_mode(const std::string& mode, const std::v
         });
 
         // Lưu bảng xếp hạng cuối cùng
-        outfile << "\n======================== FINAL LEADERBOARD ========================\n";
+        outfile << "\n================= LEADERBOARD PVE ("<< (level_bot == 1 ? "Normal" : level_bot == 2 ? "Challenge" : "Legendary") <<" version) ==================\n";
         outfile << std::left << std::setw(10) << "Rank"
                 << std::setw(15) << "Participant"
                 << std::setw(15) << "Games Played"

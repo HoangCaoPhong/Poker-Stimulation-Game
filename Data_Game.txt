@@ -1,23 +1,33 @@
-Game Mode: Poker PvP mode
+Game Mode: Single Card Duel
 Players: 
 Player #1
+Username: hi
 Total Games: 1
 Wins: 0
 Win Rate: 0%
 Win Situations: 
 -------------------------
 Player #2
+Username: nj
 Total Games: 1
 Wins: 1
 Win Rate: 100%
 Win Situations: 
-  High Card: 1 times
+  A of Hearts: 1 times
+-------------------------
+Player #3
+Username: no
+Total Games: 1
+Wins: 0
+Win Rate: 0%
+Win Situations: 
 -------------------------
 
 ======================== FINAL LEADERBOARD ========================
-Rank      Player No.     Games Played   Wins      Win Rate (%)
-1         2              1              1         100.00      
-2         1              1              0         0.00        
+Rank      Player No.     Username            Games Played   Wins      Win Rate (%)
+1         2              nj                  1              1         100.00      
+2         1              hi                  1              0         0.00        
+3         3              no                  1              0         0.00        
 ===================================================================
 
 
