@@ -85,8 +85,8 @@ void select_game_mode(std::vector<Player>& players) {
     bool valid_choice;
 
     std::cout << "\nChoose game mode: " << std::endl;
-    std::cout << "1. PVP: Player vs Player" << std::endl;
-    std::cout << "2. PVE: Player vs Bot" << std::endl;
+    std::cout << "1. Poker PVP mode (Player vs Player)" << std::endl;
+    std::cout << "2. Poker PVE mode (Player vs Bot)" << std::endl;
     std::cout << "3. Single Card Duel" << std::endl;
     std::cout << "4. Three Card Poker" << std::endl;
     std::cout << "Enter your choice (1, 2, 3, 4): ";
