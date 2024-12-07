@@ -6,132 +6,145 @@
 #include "game_database.h"
 #include <windows.h>
 //====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-//Mô tả: Thư viện này bao gồm các hàm liên quan đến giao diện game như việc nhập xuất và hiển thị thông tin 
+// Description: This library includes functions related to the game interface such as input, output, and display of information.
 
-//Hướng dẫn sử dụng: 
-    //Để sử dụng các hàm trong thư viện này, bạn cần include thư viện này vào file của mình bằng cách thêm dòng lệnh sau:
+// Usage instructions: 
+    // To use the functions in this library, you need to include this library in your file by adding the following line:
     //#include "poker_desk.h"
 
-//Thư viện này bao gồm các hàm:
+// This library includes the following functions:
 //..................................................................................................................................
-    //Các hàm nhập, kiểm tra thông tin
+    // Input and information checking functions
 
-        // Hàm nhập số người chơi
+        // Function to input the number of players
         int input_number_of_players();
 
-        // hỏi người dùng nhập Yes hoặc No 
+        // Ask the user to input Yes or No 
         bool check_Yes_No_Input();
 
-        //Hỏi người chơi có muốn chọn chế độ chơi lại không
+        // Ask the player if they want to choose the game mode again
         bool ask_to_choose_mode_again();
 
-        // Hàm hỏi người chơi có muốn chơi tiếp hay không
+        // Function to ask the player if they want to continue playing
         bool ask_to_continue();
 
-        //Hàm chọn mức độ khó của trò chơi
+        // Function to select the difficulty level of the game
         int selectGameLevel();
 //..................................................................................................................................
-    //Các hàm xuất thông tin
+    // Information output functions
 
-        // Hàm in bài của người chơi
+        // Function to print the player's cards
         void print_player_cards(std::vector<std::string> player_cards);
 
-        // Hàm in bài của tất cả người chơi
+        // Function to print all players' cards
         void print_all_player_cards(const std::vector<std::vector<std::string>>& player_cards, int number_player);
 
-        // Hàm in thông tin người chơi
+        // Function to print player information
         void print_player_info(const Player& player);
 
-        // Hàm in thông tin chế độ PvE
+        // Function to print PvE mode information
         void print_pve_info(const Player& player, bool check_bot, int level_bot);
 
-        // Hàm in leaderboard (PvE) xếp hạng người chơi dựa trên tỷ lệ thắng
+        // Function to print the leaderboard (PvE) ranking players based on win rate
         void leaderboard_pve(const std::vector<Player>& players, int level_bot);
 
-        //Hàm in leaderboard (PvE) cuối cùng xếp hạng người chơi dựa trên tỷ lệ thắng
+        // Function to print the final leaderboard (PvE) ranking players based on win rate
         void final_leaderboard_pve(const std::vector<Player>& players, int level_bot);
 
-        // Hàm in leaderboard xếp hạng người chơi
+        // Function to print the leaderboard ranking players
         void leaderboard(const std::vector<Player>& players);
         
-        //Hàm in leaderboard cuối cùng xếp hạng người chơi
+        // Function to print the final leaderboard ranking players
         void final_leaderboard(const std::vector<Player>& players);
 
-        // Hàm in hướng dẫn chơi chế độ PvP
+        // Function to print the PvP mode guide
         void printPvPGuide();
         
-        // Hàm in hướng dẫn chơi chế độ PvE
+        // Function to print the PvE mode guide
         void printPvEGuide();
 
-        // In ASCII Art Poker
+        // Print ASCII Art Poker
         void printASCIIPoker();
 
-        // In ASCII Art Poker
+        // Print ASCII Art
         void printASCIIArt();
 
-        // In hướng dẫn chơi chế độ Single Card Duel
+        // Print the Single Card Duel mode guide
         void printSingleCardDuelGuide();
 
-        // In hướng dẫn chơi chế độ Three Card Poker
+        // Print the Three Card Poker mode guide
         void printThreeCardPokerGuide();
 
-        // Hàm chỉnh màu chữ
+        // Function to set text color
         void setTextColor(int color);
 
 //====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
 
-// Hàm nhập số người chơi
+// Function to input the number of players
 int input_number_of_players() 
 {
     int number_player;
+    setTextColor(3); // Set color to Green
     std::cout << "Enter number of players(between 2 and 10): ";
+    setTextColor(0); // Reset color
     while (!(std::cin >> number_player) || number_player < 2 || number_player >= 10) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        setTextColor(2); // Set color to Red
         std::cout << "Enter again: ";
+        setTextColor(0); // Reset color
     }
+    setTextColor(3); // Set color to Green
     printASCIIArt();
+    setTextColor(0); // Reset color
     return number_player;
 }
 
-// Hàm in bài của người chơi
+// Function to print the player's cards
 void print_player_cards(std::vector<std::string> player_cards)
 {
     for (const std::string& card : player_cards)
     {
-        std::cout << card << std::endl; // In từng lá bài trên một dòng
+        setTextColor(4); // Set color to Blue
+        std::cout << card << std::endl; // Print each card on a new line
+        setTextColor(0); // Reset color
     }
     std::cout << std::endl; 
-    // Xuống dòng sau khi in xong lá bài của người chơi
+    // New line after printing the player's cards
 }
 
-// Hàm in bài của tất cả người chơi
+// Function to print all players' cards
 void print_all_player_cards(const std::vector<std::vector<std::string>>& player_cards, int number_player) 
 {
-    // In ra từng lá bài của từng người chơi theo từng dòng
+    // Print each player's cards on a new line
     for (int i = 0; i < number_player; i++) {
+        setTextColor(5); // Set color to Magenta
         std::cout << "Cards of player " << i + 1 << ":" << std::endl;
+        setTextColor(0); // Reset color
 
         for (const std::string& card : player_cards[i]) {
-            std::cout << card << std::endl; // In từng lá bài trên một dòng
+            setTextColor(4); // Set color to Blue
+            std::cout << card << std::endl; // Print each card on a new line
+            setTextColor(0); // Reset color
         }
 
-        std::cout << std::endl; // Xuống dòng sau khi in xong lá bài của người chơi
+        std::cout << std::endl; // New line after printing the player's cards
     }
 }
 
-// Hàm in thông tin người chơi
+// Function to print player information
 void print_player_info(const Player& player) {
-    // In thông tin cơ bản của người chơi
+    // Print basic player information
+    setTextColor(6); // Set color to Cyan
     std::cout << "Player " << player.number << ":\n" << "Username: " << player.username << "\n";
     std::cout << "Total games played: " << player.total_games << "\n";
     std::cout << "Total wins: " << player.wins << "\n";
     
-    // In tỷ lệ thắng, làm tròn đến 2 chữ số sau dấu phẩy
+    // Print win rate, rounded to 2 decimal places
     std::cout << "Win rate: " << std::fixed << std::setprecision(2) << player.win_rate << "%\n";
     
-    // In các tình huống thắng
+    // Print winning situations
     std::cout << "Winning situations:\n";
     if (player.win_situations.empty()) {
         std::cout << "No winning situations recorded.\n";
@@ -140,23 +153,25 @@ void print_player_info(const Player& player) {
             std::cout << "- " << situation.first << ": " << situation.second << " wins\n";
         }
     }
+    setTextColor(0); // Reset color
     std::cout << std::endl;
 }
 
 
-// Hàm in thông tin chế độ PvE
+// Function to print PvE mode information
 void print_pve_info(const Player& player, bool check_bot, int level_bot) {
     if (check_bot) 
     {
-    // In thông tin cơ bản của người chơi
+    // Print basic player information
+    setTextColor(5); // Set color to Magenta
     std::cout << "Bot("<< (level_bot == 1 ? "Normal" : level_bot == 2 ? "Challenge" : "Legendary") <<" version)\n";
     std::cout << "Total games played: " << player.total_games << "\n";
     std::cout << "Total wins: " << player.wins << "\n";
     
-    // In tỷ lệ thắng, làm tròn đến 2 chữ số sau dấu phẩy
+    // Print win rate, rounded to 2 decimal places
     std::cout << "Win rate: " << std::fixed << std::setprecision(2) << player.win_rate << "%\n";
     
-    // In các tình huống thắng
+    // Print winning situations
     std::cout << "Winning situations:\n";
     if (player.win_situations.empty()) {
         std::cout << "No winning situations recorded.\n";
@@ -165,19 +180,21 @@ void print_pve_info(const Player& player, bool check_bot, int level_bot) {
             std::cout << "- " << situation.first << ": " << situation.second << " wins\n";
         }
     }
+    setTextColor(0); // Reset color
     std::cout << std::endl;
     }
     else
     {
-        // In thông tin cơ bản của người chơi
+        // Print basic player information
+        setTextColor(6); // Set color to Cyan
         std::cout << "Player:\n";
         std::cout << "Total games played: " << player.total_games << "\n";
         std::cout << "Total wins: " << player.wins << "\n";
         
-        // In tỷ lệ thắng, làm tròn đến 2 chữ số sau dấu phẩy
+        // Print win rate, rounded to 2 decimal places
         std::cout << "Win rate: " << std::fixed << std::setprecision(2) << player.win_rate << "%\n";
         
-        // In các tình huống thắng
+        // Print winning situations
         std::cout << "Winning situations:\n";
         if (player.win_situations.empty()) {
             std::cout << "No winning situations recorded.\n";
@@ -186,6 +203,7 @@ void print_pve_info(const Player& player, bool check_bot, int level_bot) {
                 std::cout << "- " << situation.first << ": " << situation.second << " wins\n";
             }
         }
+        setTextColor(0); // Reset color
         std::cout << std::endl;
     }
 
@@ -197,17 +215,20 @@ int selectGameLevel() {
 
     // Loop until the user enters a valid level
     while (!isValid) {
+        setTextColor(3); // Set color to Green
         std::cout << "Select the Bot difficulty level:\n";
         std::cout << "1. Lv1 - Normal\n";
         std::cout << "2. Lv2 - Challenge\n";
         std::cout << "3. Lv3 - Legendary\n";
         std::cout << "Enter your choice (1-3): ";
+        setTextColor(0); // Reset color
 
-        // Kiểm tra nếu người dùng nhập sai kiểu dữ liệu
+        // Check if the user entered the wrong data type
         if (std::cin >> level) {
             // Validate the user's input
             if (level >= 1 && level <= 3) {
                 isValid = true; // Exit the loop if valid input is provided
+                setTextColor(3); // Set color to Green
                 switch (level) {
                     case 1:
                         std::cout << "You have selected Lv1 - Normal.\n";
@@ -219,51 +240,61 @@ int selectGameLevel() {
                         std::cout << "You have selected Lv3 - Legendary.\n";
                         break;
                 }
+                setTextColor(0); // Reset color
             } else {
-                // Thông báo lỗi khi người dùng chọn sai mức độ
+                // Error message when the user selects the wrong level
+                setTextColor(2); // Set color to Red
                 std::cout << "Invalid choice! Please select a number between 1 and 3.\n\n";
+                setTextColor(0); // Reset color
             }
         } else {
-            // Xử lý khi người dùng nhập không phải số
+            // Handle when the user enters a non-numeric value
+            setTextColor(2); // Set color to Red
             std::cout << "Invalid input! Please enter a valid number between 1 and 3.\n";
-            std::cin.clear();  // Xóa trạng thái lỗi của cin
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Loại bỏ các ký tự còn lại trong input buffer
+            setTextColor(0); // Reset color
+            std::cin.clear();  // Clear the error state of cin
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Remove remaining characters in the input buffer
         }
     }
     printASCIIArt();
     return level;
 }
 
-// hỏi người dùng nhập Yes hoặc No 
+// Ask the user to input Yes or No 
 bool check_Yes_No_Input() {
     char input;
     while (true) {
+        setTextColor(3); // Set color to Green
         std::cout << "Please enter Y (Yes) or N (No): ";
+        setTextColor(0); // Reset color
         std::cin >> input;
 
         if (input == 'y' || input == 'Y') {
-            return true; // Người dùng nhập Y
+            return true; // User entered Y
         } else if (input == 'n'|| input == 'N') {
-            return false; // Người dùng nhập N
+            return false; // User entered N
         } else {
-            std::cout << "Invalid input. "; // Thông báo nếu đầu vào không hợp lệ
+            setTextColor(2); // Set color to Red
+            std::cout << "Invalid input. "; // Error message for invalid input
+            setTextColor(0); // Reset color
         }
     }
 }
 
 
-// Hàm in leaderboard xếp hạng người chơi dựa trên tỷ lệ thắng
+// Function to print the leaderboard (PvE) ranking players based on win rate
 void leaderboard_pve(const std::vector<Player>& players, int level_bot) 
 {
-    // Tạo bản sao danh sách người chơi để sắp xếp
+    // Create a copy of the player list to sort
     std::vector<Player> sorted_players = players;
 
-    // Sắp xếp theo tỷ lệ thắng giảm dần
+    // Sort by win rate in descending order
     sort(sorted_players.begin(), sorted_players.end(), [](const Player& a, const Player& b) {
         return a.win_rate > b.win_rate;
     });
 
-    // In bảng xếp hạng
+    // Print the leaderboard
+    setTextColor(3); // Set color to Green
     std::cout << "\n================= LEADERBOARD PVE ("<< (level_bot == 1 ? "Normal" : level_bot == 2 ? "Challenge" : "Legendary") <<" version) ==================\n";
     std::cout << std::left << std::setw(10) << "Rank" 
          << std::setw(15) << "Participant" 
@@ -273,27 +304,32 @@ void leaderboard_pve(const std::vector<Player>& players, int level_bot)
 
     for (size_t i = 0; i < sorted_players.size(); ++i) {
         const Player& player = sorted_players[i];
+        setTextColor(4); // Set color to Blue
         std::cout << std::left << std::setw(10) << (i + 1) 
              << std::setw(15) << (player.number == 2 ? "Bot" : "Player")
              << std::setw(15) << player.total_games 
              << std::setw(10) << player.wins 
              << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
+        setTextColor(0); // Reset color
     }
-     std::cout << "================================================================\n";
+    setTextColor(3); // Set color to Green
+    std::cout << "================================================================\n";
+    setTextColor(0); // Reset color
 }
 
-//Hàm in leaderboard cuối cùng xếp hạng người chơi dựa trên tỷ lệ thắng
+// Function to print the final leaderboard (PvE) ranking players based on win rate
 void final_leaderboard_pve(const std::vector<Player>& players, int level_bot) 
 {
-    // Tạo bản sao danh sách người chơi để sắp xếp
+    // Create a copy of the player list to sort
     std::vector<Player> sorted_players = players;
 
-    // Sắp xếp theo tỷ lệ thắng giảm dần
+    // Sort by win rate in descending order
     sort(sorted_players.begin(), sorted_players.end(), [](const Player& a, const Player& b) {
         return a.win_rate > b.win_rate;
     });
 
-    // In bảng xếp hạng
+    // Print the leaderboard
+    setTextColor(3); // Set color to Green
     std::cout << "\n============== FINAL LEADERBOARD ("<< (level_bot == 1 ? "Normal" : level_bot == 2 ? "Challenge" : "Legendary") <<" version) ===============\n";
     std::cout << std::left << std::setw(10) << "Rank" 
          << std::setw(15) << "Participant" 
@@ -303,28 +339,33 @@ void final_leaderboard_pve(const std::vector<Player>& players, int level_bot)
 
     for (size_t i = 0; i < sorted_players.size(); ++i) {
         const Player& player = sorted_players[i];
+        setTextColor(4); // Set color to Blue
         std::cout << std::left << std::setw(10) << (i + 1) 
-             << std::setw(15) << (player.number == 2 ? "Bot" : "Player ")
+             << std::setw(15) << (player.number == 2 ? "Bot" : "Player")
              << std::setw(15) << player.total_games 
              << std::setw(10) << player.wins 
              << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
+        setTextColor(0); // Reset color
     }
+    setTextColor(3); // Set color to Green
     std::cout << "=======================================================================\n";
+    setTextColor(0); // Reset color
 }
 
 
-// Hàm in leaderboard xếp hạng người chơi dựa trên tỷ lệ thắng
+// Function to print the leaderboard ranking players based on win rate
 void leaderboard(const std::vector<Player>& players) 
 {
-    // Tạo bản sao danh sách người chơi để sắp xếp
+    // Create a copy of the player list to sort
     std::vector<Player> sorted_players = players;
 
-    // Sắp xếp theo tỷ lệ thắng giảm dần
+    // Sort by win rate in descending order
     sort(sorted_players.begin(), sorted_players.end(), [](const Player& a, const Player& b) {
         return a.win_rate > b.win_rate;
     });
 
-    // In bảng xếp hạng
+    // Print the leaderboard
+    setTextColor(3); // Set color to Green
     std::cout << "\n=================================== LEADERBOARD ======================================\n";
     std::cout << std::left 
               << std::setw(10) << "Rank" 
@@ -336,6 +377,7 @@ void leaderboard(const std::vector<Player>& players)
 
     for (size_t i = 0; i < sorted_players.size(); ++i) {
         const Player& player = sorted_players[i];
+        setTextColor(4); // Set color to Blue
         std::cout << std::left 
                   << std::setw(10) << (i + 1) 
                   << std::setw(15) << player.number 
@@ -343,22 +385,26 @@ void leaderboard(const std::vector<Player>& players)
                   << std::setw(15) << player.total_games 
                   << std::setw(10) << player.wins 
                   << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
+        setTextColor(0); // Reset color
     }
+    setTextColor(3); // Set color to Green
     std::cout << "=======================================================================================\n";
+    setTextColor(0); // Reset color
 }
 
-// Hàm in leaderboard cuối cùng xếp hạng người chơi dựa trên tỷ lệ thắng
+// Function to print the final leaderboard ranking players based on win rate
 void final_leaderboard(const std::vector<Player>& players) 
 {
-    // Tạo bản sao danh sách người chơi để sắp xếp
+    // Create a copy of the player list to sort
     std::vector<Player> sorted_players = players;
 
-    // Sắp xếp theo tỷ lệ thắng giảm dần
+    // Sort by win rate in descending order
     sort(sorted_players.begin(), sorted_players.end(), [](const Player& a, const Player& b) {
         return a.win_rate > b.win_rate;
     });
 
-    // In bảng xếp hạng
+    // Print the leaderboard
+    setTextColor(3); // Set color to Green
     std::cout << "\n================================= FINAL LEADERBOARD ===================================\n";
     std::cout << std::left 
               << std::setw(10) << "Rank" 
@@ -370,6 +416,7 @@ void final_leaderboard(const std::vector<Player>& players)
 
     for (size_t i = 0; i < sorted_players.size(); ++i) {
         const Player& player = sorted_players[i];
+        setTextColor(4); // Set color to Blue
         std::cout << std::left 
                   << std::setw(10) << (i + 1) 
                   << std::setw(15) << player.number 
@@ -377,38 +424,48 @@ void final_leaderboard(const std::vector<Player>& players)
                   << std::setw(15) << player.total_games 
                   << std::setw(10) << player.wins 
                   << std::setw(12) << std::fixed << std::setprecision(2) << player.win_rate << std::endl;
+        setTextColor(0); // Reset color
     }
+    setTextColor(3); // Set color to Green
     std::cout << "========================================================================================\n";
+    setTextColor(0); // Reset color
 }
 
-//Hỏi người chơi có muốn chọn chế độ chơi lại không
+// Ask the player if they want to choose the game mode again
 bool ask_to_choose_mode_again() {
     std::string user_input;
+    setTextColor(3); // Set color to Green
     std::cout << "Do you want to choose the game mode again (yes/no): ";
+    setTextColor(0); // Reset color
     std::cin >> user_input;
 
-    // Kiểm tra xem người chơi nhập "yes" hoặc "no"
+    // Check if the player entered "yes" or "no"
     if (user_input == "yes" || user_input == "y" || user_input == "Y") {
-        return true;  // Người chơi muốn chọn lại chế độ
+        return true;  // Player wants to choose the mode again
     } else if (user_input == "no" || user_input == "n" || user_input == "N") {
-        return false;  // Người chơi không muốn chọn lại chế độ
+        return false;  // Player does not want to choose the mode again
     } else {
+        setTextColor(2); // Set color to Red
         std::cout << "Invalid input! Please enter 'yes' or 'no'.\n";
-        return ask_to_choose_mode_again();  // Nếu nhập sai, yêu cầu nhập lại
+        setTextColor(0); // Reset color
+        return ask_to_choose_mode_again();  // If input is invalid, ask again
     }
 }
 
 
-// Hàm hỏi người chơi có muốn chơi tiếp hay không
+// Function to ask the player if they want to continue playing
 bool ask_to_continue() {
     char choice;
+    setTextColor(3); // Set color to Green
     std::cout << "Do you want to continue playing? (Y/N): ";
+    setTextColor(0); // Reset color
     std::cin >> choice;
     return (choice == 'Y' || choice == 'y');
 }
 
-// Hàm in hướng dẫn chơi chế độ PvP
+// Function to print the PvP mode guide
 void printPvPGuide() {
+    setTextColor(6); // Set color to Cyan
     std::cout << "=== PvP Mode (Player vs. Player) Guide ===\n";
     std::cout << "Description:\n";
     std::cout << "  + PvP mode allows two players to compete directly against each other.\n";
@@ -425,9 +482,10 @@ void printPvPGuide() {
     std::cout << "  + The game has no limit on the number of rounds.\n";
     std::cout << "  + The game ends when players decide to stop playing.\n";
     std::cout << "  + The computer will display the final Leaderboard.\n\n";
+    setTextColor(0); // Reset color
 }
 
-// Hàm in hướng dẫn chơi chế độ PvE
+// Function to print the PvE mode guide
 void printPvEGuide() {
     std::cout << "=== PvE Mode (Player vs. Environment) Guide ===\n";
     std::cout << "Description:\n";
@@ -453,7 +511,7 @@ void printPvEGuide() {
     std::cout << "  + The computer will display the final Leaderboard.\n\n";
 }
 
-// In ASCII Art Poker
+// Print ASCII Art Poker
     void printASCIIPoker() {
     std::cout << "  _____      _             \n";
     std::cout << " |  __ \\    | |            \n";
@@ -465,8 +523,9 @@ void printPvEGuide() {
     std::cout << "                           \n";
 }
 
-// In ASCII Art Poker
+// Print ASCII Art
 void printASCIIArt() {
+    setTextColor(3); // Set color to Green
     std::cout << "                                              %######%\n";
     std::cout << "                                           %*+=+++++++==+#%%%%%%*+*%\n";
     std::cout << "                                         %*-=**=---==++**++++++==#==%\n";
@@ -497,12 +556,12 @@ void printASCIIArt() {
     std::cout << "                     #-=%-      *#*%#%##*+*%-==+#%--:+%#+=-=%*+*##%*%*%=      -%=-#\n";
     std::cout << "                    #-=%:       +%*%*%%#=-*%+-=**%*++#%**=-*%+-+%#%*%*%-       :%==#\n";
     std::cout << "                   #==%-       :+%*%#%--=++#%++*#%####%#*++%#++-:+%#%*%=:       -%-+#\n";
-    std::cout << "                  #+-%=      .::+%*%#%*+++++*%#*+-::::=+*%%*+++++#%*%*%=:::      +%-+#\n";
+    std::cout << "                  #+-%=      .::+%*%#%*+++++*%#*+-::::=+*%%*+++++#%*%#%=:::      +%-+#\n";
     std::cout << "                 #+-#+      ::::+%*%*%%*+++++%+..  *=  .:##+++++#%%*%#%=::::      ##-*#\n";
-    std::cout << "                #*-*#      :::::=%*%#%#%*++++*%.        =%*++++#%%*%#%-:::::     .%+-#\n";
-    std::cout << "                #-+%.     ::::-:=%#%###%%*++++#*   #+  .%*++++#%%*%*%##=*-:::::     -%==#\n";
-    std::cout << "               #==%-     .::::-*+%#%###%%%*+++*%+  ..  ##++++#%#%*%*%##=*-:::::     +%-+#\n";
-    std::cout << "             #==*=.:-------:-**-#%%######%#%%*++*%*:-#%+++#%%#%*%*%*%%%%-=#=::----=-:.=#-+#\n";
+    std::cout << "                #*-*#      :::::=%*%#%#%*++++#*   #+  .%*++++#%%*%*%##=*-:::::     .%+-#\n";
+    std::cout << "                #-+%.     ::::-:=%#%###%%*++++*%+  ..  ##++++#%#%*%*%#%%%-=#=::----=-:.=#-+#\n";
+    std::cout << "               #==%-     .::::-*+%#%###%%%*+++*%*:-#%+++#%%#%*%*%#%%%-=#=::----=-:.=#-+#\n";
+    std::cout << "             #==*=.:-------:-**-#%%######%#%%*++*%*:-#%+++#%%#%*%*%#%%%-=#=::----=-:.=#-+#\n";
     std::cout << "            #+-%*=++=-.:-==-=*%*%%%######%###%%%#*++%#**%%%%##*%*%*%#%%%**%+=##*++++=-:-+%+-*#\n";
     std::cout << "           #+-*#=--==+++++*#+=%**%%######%###%%%#*+%#**%%%%##*%*%*%#%%%**%+=##*++++=-:-+%+-*#\n";
     std::cout << "          %*:#+:=*+-...-=++*%%%-=%%%#%###%###%#%%%%%%%%%%#%#%*%*%#%#%%%=-%%%#++=-..:-+*-:#+-#\n";
@@ -513,12 +572,9 @@ void printASCIIArt() {
     std::cout << "           %+=*%%--%+-==-:.      +*.-+-++: **+#+:..-++=:..    :++-*::#-      .--==-#%:=%#+=*%\n";
     std::cout << "            *=-+%*-##+=--===--:.=# -*:#-    .-***##*#%+%*::     =*:#::%-::--===--=+%+-##--+*\n";
     std::cout << "           +****%%%#%%%#*+======%+:%-*+    .::-=-:#+.+*=%+:::    *==#:##----==+*#%%%#%%##*+\n";
+    setTextColor(0); // Reset color
 }
 
-
-// In hướng dẫn chơi chế độ Single Card Duel
-#include <iostream>
-using namespace std;
 
 void printSingleCardDuelGuide()
 {
@@ -552,8 +608,9 @@ void printSingleCardDuelGuide()
     std::cout << "            Suit comparison applies: Spades (♠) > Hearts (♥) > Diamonds (♦) > Clubs (♣).\n";
 }
 
-// In hướng dẫn chơi chế độ Three Card Poker
+// Print the Three Card Poker mode guide
 void printThreeCardPokerGuide() {
+    setTextColor(6); // Set color to Cyan
     std::cout << "Three Card Poker Guide\n";
     std::cout << "========================\n\n";
 
@@ -584,10 +641,29 @@ void printThreeCardPokerGuide() {
     std::cout << "+ Sum the points of 3 cards.\n";
     std::cout << "+ Only take the unit digit (e.g., total 18 -> actual score 8).\n";
     std::cout << "+ Maximum score: 9 points.\n";
+    setTextColor(0); // Reset color
 }
 
-// Hàm chỉnh màu chữ
+// Function to set text color
 void setTextColor(int color) {
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, color);
+    switch (color) {
+        case 0: std::cout << "\033[0m"; break; // Reset
+        case 1: std::cout << "\033[30m"; break; // Black
+        case 2: std::cout << "\033[31m"; break; // Red
+        case 3: std::cout << "\033[32m"; break; // Green
+        case 4: std::cout << "\033[33m"; break; // Yellow
+        case 5: std::cout << "\033[34m"; break; // Blue
+        case 6: std::cout << "\033[35m"; break; // Magenta
+        case 7: std::cout << "\033[36m"; break; // Cyan
+        case 8: std::cout << "\033[37m"; break; // White
+        case 9: std::cout << "\033[90m"; break; // Bright Black (Gray)
+        case 10: std::cout << "\033[91m"; break; // Bright Red
+        case 11: std::cout << "\033[92m"; break; // Bright Green
+        case 12: std::cout << "\033[93m"; break; // Bright Yellow
+        case 13: std::cout << "\033[94m"; break; // Bright Blue
+        case 14: std::cout << "\033[95m"; break; // Bright Magenta
+        case 15: std::cout << "\033[96m"; break; // Bright Cyan
+        case 16: std::cout << "\033[97m"; break; // Bright White
+        default: std::cout << "\033[0m"; break; // Reset
+    }
 }

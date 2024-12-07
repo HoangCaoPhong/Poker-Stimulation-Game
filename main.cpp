@@ -1,46 +1,58 @@
 #include "t3_game_library/t3_library.h"
 
+// Define ANSI color codes
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
+#define WHITE   "\033[37m"
+
 int main() 
 {
     
-    // Xóa nội dung file DataTable.txt
+    // Clear the content of DataTable.txt
     clear_file();
 
-    // Khởi tạo seed cho hàm random
+    // Initialize seed for random function
     std::srand(std::time(0));  
     
-    // In ASCII Art Poker
+    // Print ASCII Art Poker with color
+    std::cout << GREEN;
     printASCIIPoker();
+    std::cout << RESET;
 
     std::cout << std::endl;
 
-    // Khởi tạo danh sách ng1ười chơi
+    // Initialize the list of players
     std::vector<Player> players;
 
     bool continue_game = true;
     bool first_game = true;
 
-    // Tiến hành các vòng chơi cho đến khi người chơi muốn dừng
+    // Proceed with game rounds until the player wants to stop
     while (continue_game) {
 
-        // kiểm tra có phải lần đầu chơi không
+        // Check if it's the first game
         if (first_game) {
             select_game_mode(players);
             first_game = false;
         } 
         
         else {
-            // Hỏi người chơi có muốn tiếp tục chơi không
+            // Ask the player if they want to choose the mode again
             if (ask_to_choose_mode_again()) {
                 select_game_mode(players);
             } else {
-                // Nếu không, hỏi người chơi có muốn chơi tiếp không
+                // If not, ask the player if they want to continue playing
                 continue_game = ask_to_continue();
             }
         }
     }
 
-    std::cout << "Thanks for playing! See you next time." << std::endl;
+    std::cout << YELLOW << "Thanks for playing! See you next time." << RESET << std::endl;
 
     return 0;
 }
