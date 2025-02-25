@@ -1,0 +1,1097 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage[paper=portrait,pagesize]{typearea}
+\usetikzlibrary{calc}
+\usepackage[T5]{fontenc}
+\usepackage[fontsize=14pt]{scrextend}%font mặc định
+\usepackage[paperheight=29.7cm,paperwidth=21cm,right=2.6cm,left=2.6cm,top=2cm,bottom=2cm]{geometry}%font a4
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\renewcommand{\thesection}{}
+\renewcommand{\thepart}{}
+
+\setcounter{secnumdepth}{0}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\newcommand{\mypart}[1]{%
+\phantomsection   %% to make links work
+\uplevel{\centering\Huge\bfseries #1}
+\addcontentsline{toc}{part}{#1}
+}
+
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}
+
+\begin{document}
+%-----------------------------------------------------------------------
+\KOMAoptions{paper=portrait,pagesize}
+\recalctypearea
+
+\begin{tikzpicture}[overlay,remember picture]  %Kẻ khung
+\draw [line width=3pt]
+   ($ (current page.north west)+ (2.0cm,-2.0cm) $)
+    rectangle
+   ($ (current page.south east) + (-2.0cm, 2.5cm) $);
+\draw [line width=0.5pt]
+   ($ (current page.north west) + (2.1cm,-2.1cm) $)
+    rectangle
+   ($ (current page.south east) + (-2.1cm,2.6cm) $);
+\end{tikzpicture}
+    
+\begin{center}
+\vspace{-6pt}   TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN \\
+\textbf{\fontsize{16pt}{0pt} \selectfont KHOA CÔNG NGHỆ THÔNG TIN}
+
+\vspace{0.5cm}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=9cm,height=9cm]{images/logo.png}
+\end{figure}
+
+\vspace{1.5cm}
+\textbf{\fontsize{24pt}{0pt} \selectfont ĐỒ ÁN CUỐI KỲ} \\
+\textbf{\fontsize{32pt}{0pt} \selectfont CHỦ ĐỀ: POKER}
+
+\vspace{1.5cm}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cc}
+        \fontsize{18pt}{0pt} \selectfont {Môn: } & \fontsize{18pt}{0pt}\textbf{}\selectfont Cơ sở lập trình \\
+        \fontsize{18pt}{0pt} \selectfont {Lớp: } & \fontsize{18pt}{0pt}\textbf{}\selectfont 24C03 \\
+        \fontsize{18pt}{0pt} \selectfont {Nhóm: } & \fontsize{18pt}{0pt}\textbf{}\selectfont 8 \\
+        \fontsize{18pt}{0pt} \selectfont {Tên nhóm: } & \fontsize{18pt}{0pt}\textbf{}\selectfont Triple Star \\
+    \end{tabular}
+\end{table}
+
+\vspace{2cm}
+\fontsize{14pt}{0pt} \selectfont Thành phố Hồ Chí Minh, 12-2024
+
+\end{center}
+
+\newpage
+%-----------------------------------------------------------------------------
+\tableofcontents
+
+
+\newpage
+%-----------------------------------------------------------------------
+\begin{center}
+{\textbf{\fontsize{16pt}{0pt} \selectfont TÓM TẮT ĐỒ ÁN}}
+\end{center}
+
+\hspace{1cm}
+Tài liệu này cung cấp chi tiết cho chương trình Poker viết bằng ngôn ngữ C++ gồm luật chơi mỗi chế độ, các tính năng của chương trình và cách hoạt động của chương trình.
+
+%-----------------------------------------------------------------------------
+\newpage
+\begin{center}
+\textbf{\fontsize{16pt}{0pt} \selectfont THÀNH VIÊN NHÓM}
+
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|l|c|c|}
+    \hline
+        Họ Và Tên & MSSV & Vai trò  \\ \hline
+        Hoàng Cao Phong & 24127486 & Trưởng nhóm \\ \hline
+        Nguyễn Trung Kiên & 24127068 & Thành viên  \\ \hline
+        Võ Thúc Trí & 24127570 & Thành viên \\ \hline
+    \end{tabular}
+\end{table}
+
+\end{center}
+
+\newpage
+%-----------------------------------------------------------------------
+\begin{center}
+\textbf{\fontsize{16pt}{0pt} \selectfont ĐÓNG GÓP CÁC THÀNH VIÊN}
+\end{center}
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|l|c|l|l|l|}
+    \hline
+        ~ & rubric & 24127486 & 24127068 & 24127570 \\ \hline
+        Standard feature & - & ~ & ~ & ~ \\ \hline
+        Initialization & 20 & 20 & 0 & 0 \\ \hline
+        Gameplay & 20 & 10 & 0 & 10 \\ \hline
+        player's information & 20 & 20 & 0 & 0 \\ \hline
+        Advance features & - & ~ & ~ & ~ \\ \hline
+        PVE game & 30 & 10 & 10 & 10 \\ \hline
+        Color/ Sound effects & 30 & 0 & 0 & 30 \\ \hline
+        Leaderboards & 30 & 15 & 5 & 10 \\ \hline
+        Creatioins & 30/each & ~ & ~ & ~ \\ \hline
+        Single Card Duel & 30 & 15 & 5 & 10 \\ \hline
+        Three Card Poker & 30 & 10 & 10 & 10 \\ \hline
+        Report & - & ~ & ~ & ~ \\ \hline
+        ~ & 100 & 10 & 70 & 20 \\ \hline
+        latex & 10 & 0 & 10 & 0 \\ \hline
+        ~ & Total: & 110 & 110 & 100 \\ \hline
+    \end{tabular}
+\end{table}
+
+
+
+%-----------------------------------------------------------------------------
+\newpage
+
+
+
+
+%-----------------------------------------------------------------------------
+\newpage
+\section{I.CHƯƠNG TRÌNH POKER}
+
+\section{1. Luật chơi: }
+\subsection{a. Luật chơi Poker mode PVP:}
+\begin{itemize}
+    \item Chương trình tự động phát 5 lá bài ngẫu nhiên cho từng người.
+    \item Bài sẽ được xét theo hạng 2 < 3 < 4 < 5 < 6 < 7 < 8 < 9 < 10 < J < Q < K < A.Chương trình sẽ xét bài của người chơi theo trật tự từ cao xuống thấp sau:
+    \begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|l|l|}
+    \hline
+        Thứ tự & Tên trường hợp & Mô tả \\ \hline
+        1 & Sảnh đồng chất (Straight Flush) & 5 lá bài liên tiếp, cùng chất. \\ \hline
+        2 & Tứ quý (Four of a Kind) & 4 lá bài cùng số. \\ \hline
+        3 & Cù lũ (Full House) & 3 lá bài cùng số và 1 đôi. \\ \hline
+        4 & Thùng (Flush) & 5 lá bài cùng chất, không cần liên tiếp. \\ \hline
+        5 & Sảnh (Straight) & 5 lá bài liên tiếp, không cần cùng chất. \\ \hline
+        6 & Bộ ba (Three of a Kind) & 3 lá bài cùng số. \\ \hline
+        7 & Hai đôi (Two Pairs) & Hai cặp bài khác nhau. \\ \hline
+        8 & Một đôi (One Pair) & Một cặp bài giống nhau. \\ \hline
+        9 & Bài cao (High Card) & Lá bài cao nhất. \\ \hline
+    \end{tabular}
+\end{table}
+    \item Chất lá bài là \textbf{không quan trọng} (chỉ xét đến hạng của lá bài).
+    \item Bộ bài của những người nào có bộ bài mang giá trị cao nhất sẽ chiến thắng
+\end{itemize}
+
+
+\subsection{b. Luật chơi Poker mode PVE: }
+\begin{itemize}
+    \item Người chơi có quyền được chọn chế độ đấu với máy (Normal, Challenge, Legendary).
+    \item Chương trình tự động phát 5 lá bài ngẫu nhiên cho người chơi và máy.
+    \item Chương trình sẽ xét bài của người chơi tương tự với mode PVP
+    \item Người chơi chiến thắng sẽ cộng 1 điểm, nếu không thì máy sẽ cộng 1 điểm.
+\end{itemize}
+
+\subsection{c. Luật chơi Poker mode Single Card Duel:}
+
+\begin{itemize}
+    \item Chương trình phát duy nhất 1 lá bài duy nhất cho từng người chơi.
+    \item Bài sẽ được xét theo hạng 2 < 3 < 4 < 5 < 6 < 7 < 8 < 9 < 10 < J < Q < K. Chất bài Bích > Cơ > Rô > Chuồn.
+    \item So sánh hạng bài của người chơi, nếu bằng nhau so hạng bài. Bài người nào có chất mạnh hơn là thắng.
+\end{itemize}
+
+\subsection{d. Luật chơi Poker mode 3 Card Poker (Bài cào):}
+\begin{itemize}
+    \item Chương trình phát 3 lá bài cho từng người chơi.
+    \item Điểm dựa trên lá bài (ví dụ lá 6 sẽ là sáu điểm), nếu là con át sẽ là 1 điểm, nếu lá bà đó là 10, J, Q ,K thì được tính là 0 điểm.
+    \item Bài sẽ được xét theo tổng điểm 3 lá bài và lấy số hàng đơn vị của lá bài đó (Ví dụ: Bài người chơi có 3 con 6 Rô, 9 Cơ, K Bích thì điểm là 6+9+0 = 15. Quy ra được 5 điểm)
+    \item So sánh điểm của từng người chơi, nếu người chơi chiến thắng nếu có số điểm cao nhất.
+\end{itemize}
+   
+\section{2. Các tính năng của các thư viện chương trình chương trình: }
+\subsection{a. Các thư viện chuẩn: }
+\begin{itemize}
+    \item <iostream>: Thư viện nhập xuất chuẩn của chương trình.
+    \item <vector>: Thư viện sử dụng mảng động.
+    \item <fstream>: Thư viện xuất nhập file.
+    \item <string>/<cstring>: 2 thư viện dùng để liên quan đến chuỗi.
+    \item <sstream>: Thư viện xử lý chuỗi
+    \item <map>: Thư viện xử lý map
+    \item <algorithm>: Thư viện chứa các thuật toán có sẵn cần thiết cho chương trình.
+    \item <iomanip>: Thư viện hỗ trợ nhập xuất chuẩn cho chương trình.
+    
+\end{itemize}
+\subsection{b. Các thư viện tự khởi tạo: }
+\begin{itemize}
+    \item "52\_cards.h": Thư viện này bao gồm các hàm liên quan đến việc khởi tạo và sử dụng bộ bài 52 lá.
+    \item "game\_database.h": Thư viện này bao gồm các hàm liên quan đến việc xây dựng Database cho trò chơi.
+    \item "poker\_desk.h": Thư viện này bao gồm các hàm liên quan đến việc nhập xuất và hiển thị thông tin.
+    \item "gameMode.h": Thư viện này bao gồm các hàm liên quan đến việc khởi tạo và thực thi các chế độ game.
+    \item "file\_manipulation.h": Thư viện này bao gồm các hàm liên quan đến việc nhập xuất file
+    \item "t3\_game\_library/t3\_library.h": Thư viện tổng hợp toàn bộ thư viện khác.
+
+\end{itemize}
+
+
+\section{3. Các hàm trong thư viện tự khởi tạo: }
+\subsection{a. Thư viện "52\_cards.h": }
+Thư viện này bao gồm các các hàm:
+
+\begin{itemize}
+    \item \textbf{vector <string> return\_pack ()}: 
+    \begin{description}
+\item[Hàm `return\_pack()`]
+    Hàm này tạo ra một bộ bài 52 lá và trả về nó dưới dạng một vector các chuỗi.
+    \begin{enumerate}
+        \item Khởi tạo:
+            - Khai báo một vector tên là `pack` để lưu trữ các chuỗi đại diện cho các lá bài.
+        \item Vòng lặp tạo lá bài:
+            - Một vòng lặp `for` lặp qua 52 lần, đại diện cho mỗi lá bài trong bộ bài.
+            - Trong mỗi lần lặp:
+                - Xác định cấp số của lá bài hiện tại bằng cách sử dụng toán tử modulo (`% 13`) và một câu lệnh `switch`:
+                    - Nếu số dư là 10, 11, 12, 0 hoặc 1, lá bài là "10", "J", "Q", "K" hoặc "A" tương ứng.
+                    - Nếu không, số dư được chuyển đổi thành một ký tự đại diện cho cấp số số (2-9).
+                - Thêm chất của lá bài vào chuỗi lá bài dựa trên lần lặp hiện tại:
+                    - Nếu lần lặp nằm trong khoảng từ 1 đến 13, chất là "spade".
+                    - Nếu lần lặp nằm trong khoảng từ 14 đến 26, chất là "club".
+                    - Nếu lần lặp nằm trong khoảng từ 27 đến 39, chất là "diamond".
+                    - Nếu lần lặp nằm trong khoảng từ 40 đến 52, chất là "heart".
+                - Chuỗi lá bài hoàn chỉnh được thêm vào vector `pack`.
+        \item Trả về:
+            - Hàm trả về vector `pack` chứa 52 chuỗi đại diện cho các lá bài.
+    \end{enumerate}
+\end{description}
+    \item \textbf{void rank\_player\_cards(vector<vector<<string>>\&player\_cards, int \\number\_player, int ranks[ ], int suits[ ])}: Hàm sắp xếp lá bài của các người chơi, quá trình bao gồm:
+    \begin{description}
+        \begin{itemize}
+            \item Xác định quân và chất của mỗi lá bài:
+                \begin{itemize}
+                    \item Duyệt qua từng người chơi.
+                    \item Duyệt qua 5 lá bài của mỗi người chơi.
+                    \item Sử dụng hàm `get\_rank` và `get\_suit` để xác định quân số và chất của mỗi lá bài.
+                    \item Lưu trữ thông tin quân số và chất vào các mảng `ranks` và `suits` tương ứng.
+                \end{itemize}
+            \item Sắp xếp các lá bài:
+                \begin{itemize}
+                    \item Duyệt qua từng người chơi.
+                    \item Sử dụng thuật toán sắp xếp nổi bọt (bubble sort) để sắp xếp các lá bài của mỗi người chơi theo thứ tự tăng dần của quân số.
+                    \item So sánh cặp lá bài liên tiếp. Nếu quân số của lá bài thứ nhất lớn hơn quân số của lá bài thứ hai, thì hoán đổi vị trí của hai lá bài đó trong cả mảng `player\_cards` và mảng `ranks`.
+                \end{itemize}
+        \end{itemize}
+\end{description}
+
+    \item \textbf{std::vector<std::vector<std::string>>deal\_cards(...)}: Chia bài
+    \begin{description}
+        \begin{itemize}
+            \item Khởi tạo mảng: Tạo một vector 2 chiều để lưu trữ bài của từng người chơi.
+            \item Chia bài:
+                \begin{itemize}
+                    \item Duyệt qua từng lá bài trong bộ bài đã xáo trộn.
+                    \item Sử dụng phép toán modulo để xác định người chơi tiếp theo nhận bài.
+                    \item Thêm lá bài hiện tại vào vector bài của người chơi đó.
+                \end{itemize}
+        \end{itemize}
+    \end{description}
+    
+    \item \textbf{vector <string> return\_shuffled\_pack (vector <string> shuffled\_pack)}: Hàm chia bài cho n người chơi
+    \begin{description}
+        \begin{enumerate}
+            \item Khởi tạo bộ sinh số ngẫu nhiên:
+                \begin{itemize}
+                    \item `srand(time(0))`: Hàm `srand` được gọi với đối số là `time(0)`. Điều này sẽ giúp đảm bảo rằng mỗi lần chạy chương trình, ta sẽ nhận được một dãy số ngẫu nhiên khác nhau.
+                \end{itemize}
+            \item Xáo trộn bộ bài:
+                \begin{itemize}
+                    \item `std::random\_shuffle(shuffled\_pack.begin(), shuffled\_pack.end())`: Hàm này sẽ sắp xếp ngẫu nhiên các phần tử trong vector `shuffled\_pack` dựa trên bộ sinh số ngẫu nhiên đã được khởi tạo ở bước trước.
+                \end{itemize}
+            \item Trả về kết quả:
+                \begin{itemize}
+                    \item Hàm trả về vector `shuffled\_pack` sau khi đã được xáo trộn.
+                \end{itemize}
+        \end{enumerate}
+\end{description}
+
+    \item \textbf{vector<vector<string>>deal\_cards\_Single\_Card\_Duel(const vector\\<string>\& shuffled\_pack, int number\_player)}: Hàm chia bài cho n người chơi chế độ Single Card Duel.
+    \begin{description}
+        \begin{enumerate}
+            \item Khởi tạo:
+                \begin{itemize}
+                    \item Tạo một vector hai chiều player\_cards để lưu trữ các lá bài của mỗi người chơi. Kích thước của vector này bằng số lượng người chơi.
+                \end{itemize}
+            \item Chia bài:
+                \begin{itemize}
+                    \item Duyệt qua từng người chơi.
+                    \item Lấy lá bài đầu tiên từ bộ bài đã xáo trộn.
+                    \item Thêm lá bài này vào vector của người chơi hiện tại.
+                \end{itemize}
+            \item Trả về kết quả:
+                \begin{itemize}
+                    \item Trả về vector player\_cards chứa các lá bài đã được chia cho mỗi người chơi.
+                \end{itemize}
+        \end{enumerate}
+\end{description}
+    \item \textbf{int get\_rank(const std::string\& card)}: Hàm lấy giá trị thứ hạng từ chuỗi.
+    \begin{description}
+            \begin{enumerate}
+            \item Tách thứ hạng của lá bài:
+                \begin{itemize}
+                    \item Hàm substr được sử dụng để trích xuất phần biểu thị thứ hạng của lá bài từ chuỗi card. Phần này nằm trước khoảng trắng đầu tiên.
+                    \item Kết quả được gán vào biến rank\_str.
+                \end{itemize}
+            \item Tạo một map ánh xạ thứ hạng:
+                \begin{itemize}
+                    \item Một std::map được tạo để ánh xạ giữa biểu diễn chuỗi của thứ hạng (ví dụ: "2", "J", "A") và giá trị số tương ứng.
+                \end{itemize}
+            \item Trả về giá trị thứ hạng:
+                \begin{itemize}
+                    \item Giá trị chất của lá bài được lấy từ suit\_map dựa trên khóa suit\_str và được trả về.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+    
+    \item \textbf{int get\_suit(const std::string\& card)}: Hàm lấy giá trị chất của chuỗi.
+    \begin{description}
+            \begin{enumerate}
+            \item Tách chất của lá bài:
+                \begin{itemize}
+                    \item Hàm substr được sử dụng để trích xuất phần biểu thị chất của lá bài từ chuỗi card. Phần này nằm sau khoảng trắng đầu tiên.
+                    \item Kết quả được gán vào biến suit\_str.
+                \end{itemize}
+            \item Tạo một map ánh xạ chất:
+                \begin{itemize}
+                    \item Một std::map được tạo để ánh xạ giữa biểu diễn chuỗi của chất (ví dụ: "spade", "heart", "diamond", "club") và giá trị số tương ứng.
+                \end{itemize}
+            \item Trả về giá trị chất:
+                \begin{itemize}
+                    \item Giá trị chất của lá bài được lấy từ suit\_map dựa trên khóa suit\_str và được trả về.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+
+    \item int get\_card\_value(const std::string\& card): Lấy giá trị điểm của lá bài (chỉ tính chữ số hàng đơn vị) trong Bài cào:
+    \begin{description}
+            \begin{enumerate}
+            \item Lấy thứ hạng:
+                \begin{itemize}
+                    \item Gọi hàm get\_rank để lấy thứ hạng của lá bài. Thứ hạng này là một số nguyên từ 1 đến 13 tương ứng với các lá bài từ 2 đến Át.
+                \end{itemize}
+            \item Tính giá trị điểm:
+                \begin{itemize}
+                    \item Các lá bài từ 2 đến 10: Giá trị điểm bằng chính thứ hạng của lá bài.
+                    \item Các lá bài J, Q, K: Giá trị điểm đều là 10.
+                    \item Toán tử \% 10: Dùng để lấy phần dư khi chia cho 10. Điều này đảm bảo rằng giá trị điểm luôn nằm trong khoảng từ 0 đến 9.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+\end{itemize}
+
+\subsection{b. Thư viện "game\_database.h": }
+Thư viện này xây dựng Database cho người chơi bao gồm:
+\begin{itemize}
+    \item \textbf{enum Hand\_Rank}: Phân loại bài.
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/screenshot/enum_hank_rank.png}
+    \end{figure}
+
+    \item \textbf{struct Player}: Cấu trúc dữ liệu người chơi bao gồm số thứ tự người chơi, tổng số màn chơi, số lần thắng, tỉ lệ thắng, dạng thắng nhiều nhất.
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/screenshot/struct_player.png}
+    \end{figure}
+
+    \item \textbf{enum Suit: }
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/enum suit.png}
+    \end{figure}    
+    \item \textbf{struct Card: }
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/struct card.png}
+    \end{figure}
+
+\end{itemize}
+    
+    
+
+\subsection{c. Thư viện "poker\_desk.h": }
+Thư viện bao gồm các hàm liên quan đến giao diện game như việc nhập xuất và hiển thị thông tin.
+Thư viện này bao gồm các hàm:
+
+Các hàm nhập, kiểm tra thông tin:
+\begin{itemize}
+    \item \textbf{int input\_number\_of\_players()}: Chức năng nhập số lượng người chơi
+    \begin{description}
+            \begin{enumerate}
+            \item Khai báo biến:
+                \begin{itemize}
+                    \item Khai báo biến number\_player để lưu trữ số lượng người chơi nhập vào.
+                \end{itemize}
+            \item Yêu cầu nhập liệu:
+                \begin{itemize}
+                    \item In ra màn hình một thông báo yêu cầu người dùng nhập số lượng người chơi.
+                \end{itemize}
+            \item Kiểm tra đầu vào:
+                \begin{itemize}
+                    \item Dùng vòng lặp while để kiểm tra tính hợp lệ của đầu vào.
+                    \item Nếu người dùng không nhập một số nguyên hoặc số lượng người chơi không nằm trong khoảng từ 2 đến 9, thì in ra thông báo lỗi và yêu cầu nhập lại.
+                    \item Dùng std::cin.clear() để xóa cờ lỗi của luồng nhập và std::cin.ignore() để bỏ qua các ký tự không hợp lệ.
+                \end{itemize}
+            \item In hình ASCII:
+                \begin{itemize}
+                    \item Nếu đầu vào hợp lệ, in ra một hình ASCII.
+                \end{itemize}
+            \item Trả về số lượng người chơi:
+                \begin{itemize}
+                    \item Trả về giá trị number\_player đã được nhập và kiểm tra hợp lệ.
+                \end{itemize}    
+        \end{enumerate}
+    \end{description}
+    
+    \item \textbf{bool check\_Yes\_No\_Input()}: Yêu cầu người dùng nhập Có hoặc Không
+    \begin{description}
+            \begin{enumerate}
+            \item Khai báo biến:
+                \begin{itemize}
+                    \item Khai báo biến input kiểu char để lưu trữ ký tự nhập vào bởi người dùng.
+                \end{itemize}
+            \item Vòng lặp kiểm tra:
+                \begin{itemize}
+                    \item In ra màn hình một thông báo yêu cầu người dùng nhập số lượng người chơi.
+                    \item Sử dụng một vòng lặp while(true) để tạo một vòng lặp vô hạn.
+                    \item Yêu cầu người dùng nhập một ký tự.
+                    \item Kiểm tra xem ký tự nhập vào có phải là 'Y', 'y', 'N' hay 'n'.
+                    \item Nếu là 'Y' hoặc 'y', trả về true.
+                    \item Nếu là 'N' hoặc 'n', trả về false.
+                    \item Nếu không phải là một trong các ký tự trên, in ra thông báo lỗi và yêu cầu nhập lại.
+                \end{itemize} 
+        \end{enumerate}
+    \end{description}
+    
+    \item \textbf{bool ask\_to\_choose\_mode\_again()}: Hỏi người chơi xem họ có muốn chọn lại chế độ trò chơi không
+    \begin{description}
+            \begin{enumerate}
+            \item Khai báo biến:
+                \begin{itemize}
+                    \item Khai báo biến user\_input kiểu std::string để lưu trữ câu trả lời của người dùng.
+
+                \end{itemize}
+            \item Yêu cầu nhập liệu:
+                \begin{itemize}
+                    \item In ra màn hình một thông báo yêu cầu người dùng nhập "yes" hoặc "no".
+                \end{itemize}
+            \item Kiểm tra đầu vào:
+                \begin{itemize}
+                    \item In ra màn hình một thông báo yêu cầu người dùng nhập "yes" hoặc "no".
+                    \item Sử dụng một vòng lặp while(true) để tạo một vòng lặp vô hạn.
+                    \item Yêu cầu người dùng nhập một ký tự.
+                    \item Kiểm tra xem ký tự nhập vào có phải là 'Y', 'y', 'N' hay 'n'.
+                    \item Nếu là 'Y' hoặc 'y', trả về true.
+                    \item Nếu là 'N' hoặc 'n', trả về false.
+                    \item Nếu không phải là một trong các ký tự trên, in ra thông báo lỗi và yêu cầu nhập lại.
+                \end{itemize} 
+        \end{enumerate}
+    \end{description}
+    
+    \item \textbf{bool ask\_to\_continue();}: Chức năng hỏi người chơi có muốn tiếp tục chơi không
+    \begin{description}
+            \begin{enumerate}
+            \item Khai báo biến:
+                \begin{itemize}
+                    \item Khai báo biến choice kiểu char để lưu trữ ký tự nhập vào bởi người dùng.
+
+                \end{itemize}
+            \item Yêu cầu nhập liệu:
+                \begin{itemize}
+                    \item In ra màn hình một thông báo yêu cầu người dùng nhập "Y" hoặc "N".
+                \end{itemize}
+            \item Kiểm tra đầu vào:
+                \begin{itemize}
+                    \item In ra màn hình một thông báo yêu cầu người dùng nhập "yes" hoặc "no".
+                    \item Sử dụng một vòng lặp while(true) để tạo một vòng lặp vô hạn.
+                    \item Yêu cầu người dùng nhập một ký tự.
+                    \item Kiểm tra xem ký tự nhập vào có phải là 'Y', 'y', 'N' hay 'n'.
+                    \item Nếu là 'Y' hoặc 'y', trả về true.
+                    \item Nếu là 'N' hoặc 'n', trả về false.
+                    \item Nếu không phải là một trong các ký tự trên, in ra thông báo lỗi và yêu cầu nhập lại.
+                \end{itemize} 
+        \end{enumerate}
+    \end{description}
+
+    \item \textbf{int selectGameLevel()}: Chức năng chọn mức độ khó của trò chơi.
+    \begin{description}
+            \begin{enumerate}
+            \item Khai báo biến:
+                \begin{itemize}
+                    \item Khai báo biến level để lưu trữ mức độ khó được chọn.
+                    \item Khai báo biến isValid để kiểm tra tính hợp lệ của đầu vào.
+                \end{itemize}
+            \item Vòng lặp kiểm tra:
+                \begin{itemize}
+                    \item Sử dụng vòng lặp while để lặp lại cho đến khi người dùng nhập một đầu vào hợp lệ.
+                    \item Hiển thị menu với các mức độ khó.
+                    \item Dùng std::cin >> level để đọc đầu vào từ người dùng.
+                \end{itemize}
+            \item Kiểm tra đầu vào:
+                \begin{itemize}
+                    \item Kiểm tra kiểu dữ liệu: Nếu người dùng nhập một giá trị không phải số, std::cin >> level sẽ trả về false.
+                    \item Kiểm tra giá trị: Nếu đầu vào là số, kiểm tra xem nó nằm trong khoảng từ 1 đến 3.
+                    \item Nếu hợp lệ, gán isValid là true để thoát vòng lặp và in thông báo xác nhận.
+                    \item Nếu không hợp lệ, in ra thông báo lỗi và yêu cầu nhập lại.
+                \end{itemize} 
+            \item Xử lý lỗi đầu vào:
+            \begin{itemize}
+                    \item Nếu người dùng nhập một giá trị không hợp lệ, sử dụng std::cin.clear() để xóa cờ lỗi và std::cin.ignore() để bỏ qua các ký tự không hợp lệ còn lại trong bộ đệm đầu vào.
+                \end{itemize}
+            \item In hình ASCII:
+            \begin{itemize}
+                    \item Sau khi nhận được đầu vào hợp lệ, hàm printASCIIArt() được gọi để in ra một hình ASCII.
+                \end{itemize}
+            \item Trả về mức độ khó:
+            \begin{itemize}
+                    \item Trả về giá trị của level đã được chọn.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+\end{itemize}
+Các hàm xuất thông tin:
+\begin{itemize}
+    \item \textbf{void print\_player\_cards(std::vector<std::string> player\_cards);}: Chức năng in thẻ của người chơi
+    \begin{description}
+            \begin{enumerate}
+            \item Duyệt qua các lá bài:
+                \begin{itemize}
+                    \item Sử dụng một vòng lặp for-each để duyệt qua từng lá bài trong vector player\_cards.
+
+                \end{itemize}
+            \item In ra màn hình:
+                \begin{itemize}
+                    \item Đối với mỗi lá bài, thay đổi màu chữ thành xanh dương (mã màu 4) và in ra lá bài đó trên một dòng mới.
+                    \item Sau khi in xong tất cả các lá bài, in ra một dòng trống để phân cách với các thông tin khác.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+
+    \item \textbf{void print\_all\_player\_cards(const std::vector<std::vector<std::string>>\& player\_cards, int number\_player)}: Chức năng in tất cả các thẻ của người chơi
+    \begin{description}
+            \begin{enumerate}
+            \item Duyệt qua các người chơi:
+                \begin{itemize}
+                    \item Sử dụng một vòng lặp for để duyệt qua từng người chơi.
+
+                \end{itemize}
+            \item In thông tin người chơi:
+                \begin{itemize}
+                    \item In ra màn hình thông tin về người chơi hiện tại, bao gồm số thứ tự của người chơi.
+                \end{itemize}
+            \item In các lá bài của người chơi:
+                \begin{itemize}
+                    \item Sử dụng một vòng lặp for-each để duyệt qua từng lá bài của người chơi hiện tại.
+                    \item Đối với mỗi lá bài, thay đổi màu chữ thành xanh dương và in ra lá bài đó trên một dòng mới.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+    
+    \item \textbf{void print\_player\_info(const Player\& player);}:Chức năng in thông tin người chơi
+    \begin{description}
+            \begin{enumerate}
+            \item In thông tin cơ bản:
+                \begin{itemize}
+                    \item In ra số thứ tự, tên người dùng, tổng số trận đấu đã chơi và tổng số trận thắng của người chơi.
+                \end{itemize}
+            \item In tỉ lệ thắng:
+                \begin{itemize}
+                    \item Tính toán và in ra tỉ lệ thắng của người chơi, làm tròn đến 2 chữ số thập phân.
+                \end{itemize}
+            \item In các tình huống thắng:
+                \begin{itemize}
+                    \item Nếu người chơi chưa có bất kỳ tình huống thắng nào, in ra thông báo tương ứng.
+                    \item Nếu có, duyệt qua danh sách các tình huống thắng và in ra từng tình huống cùng với số lần xảy ra.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+    
+    \item \textbf{void print\_pve\_info(const Player\& player, bool check\_bot, int level\_bot);}:Chức năng in thông tin chế độ PvE
+    \begin{description}
+            \begin{enumerate}
+            \item Kiểm tra chế độ chơi:
+                \begin{itemize}
+                    \item Nếu check\_bot là true, tức là đang chơi với bot, thì in thông tin của bot.
+                \item Nếu check\_bot là false, tức là chơi với người thật, thì in thông tin của người chơi.
+                \end{itemize}
+            \item In thông tin cơ bản:
+                \begin{itemize}
+                    \item In ra thông tin cơ bản của người chơi hoặc bot, bao gồm tên (hoặc mức độ khó của bot), tổng số trận đấu đã chơi và tổng số trận thắng.
+                \end{itemize}
+            \item In tỉ lệ thắng:
+                \begin{itemize}
+                    \item Tính toán và in ra tỉ lệ thắng, làm tròn đến 2 chữ số thập phân.
+                \end{itemize}
+            \item In các tình huống thắng:
+                \begin{itemize}
+                    \item Nếu người chơi hoặc bot chưa có bất kỳ tình huống thắng nào, in ra thông báo tương ứng.
+                    \item Nếu có, duyệt qua danh sách các tình huống thắng và in ra từng tình huống cùng với số lần xảy ra.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+    
+    \item \textbf{void leaderboard\_pve(const std::vector<Player>\& players, int level\_bot);}: Chức năng in bảng xếp hạng (PvE) xếp hạng người chơi dựa trên tỷ lệ thắng
+    \begin{description}
+            \begin{enumerate}
+            \item Sao chép danh sách người chơi:
+                \begin{itemize}
+                    \item Tạo một bản sao của danh sách người chơi để tránh thay đổi danh sách gốc.
+                \end{itemize}
+            \item Sắp xếp danh sách:
+                \begin{itemize}
+                    \item Sắp xếp danh sách người chơi theo tỉ lệ thắng giảm dần.
+                \end{itemize}
+            \item In tiêu đề bảng xếp hạng:
+                \begin{itemize}
+                    \item In tiêu đề bảng xếp hạng bao gồm các cột: Rank, Participant, Games Played, Wins, Win Rate.
+                \end{itemize}
+            \item In thông tin từng người chơi:
+                \begin{itemize}
+                    \item Duyệt qua danh sách người chơi đã được sắp xếp.
+                    \item In thông tin của từng người chơi, bao gồm thứ hạng, tên (hoặc "Bot"), số trận đấu đã chơi, số trận thắng, và tỉ lệ thắng.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+    
+    \item \textbf{void final\_leaderboard\_pve(const std::vector<Player>\& players, int level\_bot);}:Chức năng in bảng xếp hạng cuối cùng (PvE) xếp hạng người chơi dựa trên tỷ lệ thắng tương tự với hàm leaderboard\_pve():
+    \begin{description}
+            \begin{enumerate}
+            \item Sao chép danh sách người chơi:
+                \begin{itemize}
+                    \item Tạo một bản sao của danh sách người chơi để tránh thay đổi danh sách gốc.
+                \end{itemize}
+            \item Sắp xếp danh sách:
+                \begin{itemize}
+                    \item Sắp xếp danh sách người chơi theo tỉ lệ thắng giảm dần.
+                \end{itemize}
+            \item In tiêu đề bảng xếp hạng:
+                \begin{itemize}
+                    \item In tiêu đề bảng xếp hạng bao gồm các cột: Rank, Participant, Games Played, Wins, Win Rate.
+                \end{itemize}
+            \item In thông tin từng người chơi:
+                \begin{itemize}
+                    \item Duyệt qua danh sách người chơi đã được sắp xếp.
+                    \item In thông tin của từng người chơi, bao gồm thứ hạng, tên (hoặc "Bot"), số trận đấu đã chơi, số trận thắng, và tỉ lệ thắng.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+    
+    \item \textbf{void leaderboard(const std::vector<Player>\& players);}:Chức năng in bảng xếp hạng người chơi
+    \begin{description}
+            \begin{enumerate}
+            \item Sao chép danh sách người chơi:
+                \begin{itemize}
+                    \item Tạo một bản sao của danh sách người chơi để tránh thay đổi danh sách gốc.
+                \end{itemize}
+            \item Sắp xếp danh sách:
+                \begin{itemize}
+                    \item Sắp xếp danh sách người chơi theo tỉ lệ thắng giảm dần.
+                \end{itemize}
+            \item In tiêu đề bảng xếp hạng:
+                \begin{itemize}
+                    \item In tiêu đề bảng xếp hạng bao gồm các cột: Rank, Participant, Games Played, Wins, Win Rate.
+                \end{itemize}
+            \item In thông tin từng người chơi:
+                \begin{itemize}
+                    \item Duyệt qua danh sách người chơi đã được sắp xếp.
+                    \item In thông tin của từng người chơi, bao gồm thứ hạng, số thứ tự người chơi, tên người chơi, số trận đấu đã chơi, số trận thắng, và tỉ lệ thắng.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+    
+    
+    \item \textbf{void final\_leaderboard(const std::vector<Player>\& players);}:Chức năng in bảng xếp hạng cuối cùng của người chơi
+    \begin{description}
+            \begin{enumerate}
+            \item Sao chép danh sách người chơi:
+                \begin{itemize}
+                    \item Tạo một bản sao của danh sách người chơi để tránh thay đổi danh sách gốc.
+                \end{itemize}
+            \item Sắp xếp danh sách:
+                \begin{itemize}
+                    \item Sắp xếp danh sách người chơi theo tỉ lệ thắng giảm dần.
+                \end{itemize}
+            \item In tiêu đề bảng xếp hạng:
+                \begin{itemize}
+                    \item In tiêu đề bảng xếp hạng bao gồm các cột: Rank, Participant, Games Played, Wins, Win Rate.
+                \end{itemize}
+            \item In thông tin từng người chơi:
+                \begin{itemize}
+                    \item Duyệt qua danh sách người chơi đã được sắp xếp.
+                    \item In thông tin của từng người chơi, bao gồm thứ hạng, số thứ tự người chơi, tên người chơi, số trận đấu đã chơi, số trận thắng, và tỉ lệ thắng.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+    
+    \item \textbf{void printPvPGuide()}:Chức năng in hướng dẫn chế độ PvP
+    \item \textbf{void printPvEGuide()}:Chức năng in hướng dẫn chế độ PvE
+    \item \textbf{void printASCIIPoker()}:In ASCII Art Poker
+    \item \textbf{void printASCIIArt()}:In ảnh ASCII
+    \item \textbf{void printSingleCardDuelGuide()}:In hướng dẫn chế độ Đấu bài đơn
+    \item \textbf{void printThreeCardPokerGuide()}:In hướng dẫn chế độ chơi Bài cào
+
+\end{itemize}
+
+\newpage
+\subsection{d. Thư viện "gameMode.h": }
+\begin{itemize}
+    \item \textbf{void select\_game\_mode(std::vector<Player>\& players)}: Hàm chọn chế độ chơi.
+\end{itemize}
+    \begin{figure}[h!]
+        \centering 
+        \includegraphics[width=1\textwidth]{images/screenshot/select_game_mode.png}
+    \end{figure}
+ \begin{description}
+            \begin{enumerate}
+            \item Khai báo biến:
+                \begin{itemize}
+                    \item mode\_choice: Lưu trữ lựa chọn chế độ chơi của người chơi (kiểu int).
+                    \item valid\_choice: Kiểm tra xem lựa chọn của người chơi có hợp lệ không (kiểu bool).
+                \end{itemize}
+            \item Hiển thị menu:
+                \begin{itemize}
+                    \item In ra danh sách các chế độ chơi có sẵn.
+                \end{itemize}
+            \item Nhập lựa chọn:
+                \begin{itemize}
+                    \item Yêu cầu người chơi nhập lựa chọn chế độ chơi.
+                \end{itemize}
+            \item Kiểm tra tính hợp lệ của đầu vào:
+                \begin{itemize}
+                    \item Sử dụng vòng lặp do-while để lặp lại cho đến khi người chơi nhập lựa chọn hợp lệ.
+                    \item Kiểm tra xem đầu vào có phải là số nguyên nằm trong phạm vi 1-4 hay không.
+                    \item Xóa trạng thái lỗi của cin và bỏ qua đầu vào không hợp lệ nếu người dùng nhập sai.
+                \end{itemize}
+            \item Xử lý lựa chọn hợp lệ:
+                \begin{itemize}
+                    \item Sử dụng câu lệnh switch để thực thi hàm tương ứng với lựa chọn của người chơi:
+                    \item case 1: Chạy chế độ chơi "Player vs Player" (chưa được cung cấp hàm run\_poker\_pvp\_mode).
+                    \item case 2: Chạy chế độ chơi "Player vs Bot" (chưa được cung cấp hàm run\_poker\_pve\_mode).
+                    \item case 3: Chạy chế độ chơi "Single Card Duel" (chưa được cung cấp hàm run\_Single\_Card\_Duel).
+                    \item case 4: Chạy chế độ chơi "Three Card Poker" (chưa được cung cấp hàm run\_Three\_Card\_Poker).
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+
+\vspace{1cm}
+
+\textbf{\fontsize{17pt}{0pt} *Chế độ PvP\_Poker:}
+
+\begin{itemize}
+    \item \textbf{void run\_poker\_pvp\_mode()}: Khởi tạo và thực thi chế độ chơi PVP.
+    \begin{description}
+            \begin{enumerate}
+            \item Khởi tạo:
+                \begin{itemize}
+                    \item Khởi tạo số lượng người chơi.
+                    \item Khởi tạo thông tin cho mỗi người chơi.
+                \end{itemize}
+            \item Vòng lặp chơi:
+                \begin{itemize}
+                    \item Tạo bộ bài, xáo bài và chia bài cho các người chơi.
+                    \item Xác định loại bài và tính điểm cho mỗi người chơi.
+                    \item Xác định người chiến thắng.
+                    \item Cập nhật thông tin người chơi (số trận đấu, số trận thắng, tỉ lệ thắng, tình huống thắng).
+                    \item In thông tin người chơi và bảng xếp hạng.
+                    \item Hỏi người chơi có muốn tiếp tục hay không.
+                \end{itemize}
+            \item Kết thúc trò chơi:
+                \begin{itemize}
+                    \item In bảng xếp hạng cuối cùng.
+                    \item Lưu dữ liệu trò chơi vào file.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+    
+    \item \textbf{void calculate\_player\_points(...)}: Tính điểm cho từng người chơi. Hàm đầy đủ ở dưới dây:
+    \begin{figure}[h!]
+        \centering 
+        \includegraphics[width=1\textwidth]{images/screenshot/calc_player.png}
+    \end{figure}
+
+    \begin{description}
+            \begin{enumerate}
+            \item Xác định tổ hợp bài:
+                \begin{itemize}
+                    \item Hàm kiểm tra từng tay bài để xác định tổ hợp bài mạnh nhất. Các tổ hợp bài được kiểm tra bao gồm:
+                    \begin{itemize}
+                        \item Thùng phá sảnh (Straight Flush)
+                        \item Tứ quý (Four of a Kind)
+                        \item Cù lũ (Full House)
+                        \item Thùng (Flush)
+                        \item Sảnh (Straight)
+                        \item Ba lá giống nhau (Three of a Kind)
+                        \item Hai đôi (Two Pair)
+                        \item Một đôi (One Pair)
+                        \item  Mậu thầu (High Card)
+                    \end{itemize}
+                \end{itemize}
+            \item Gán điểm:
+                \begin{itemize}
+                    \item Mỗi tổ hợp bài được gán một điểm số tương ứng. Tổ hợp bài càng mạnh, điểm số càng cao.
+                    \item Nếu hai người chơi có cùng một tổ hợp bài, người chơi có lá bài cao nhất trong tổ hợp đó sẽ thắng.
+                \end{itemize}
+            \item Lưu trữ điểm số:
+                \begin{itemize}
+                    \item player\_value\_card\_points: Lưu trữ tổng điểm của tay bài.
+                    \item player\_rank\_points: Lưu trữ điểm của lá bài cao nhất trong tay bài.
+                \end{itemize}
+            \item In thông tin (tùy chọn):
+                \begin{itemize}
+                    \item Nếu check\_print được đặt là true, hàm sẽ in ra thông tin về tay bài của mỗi người chơi, bao gồm loại tổ hợp bài và lá bài cao nhất.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+
+    \item \textbf{void determine\_winner(...)}: Xác định người chiến thắng. Khai báo hàm đầy đủ dưới đây.
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/det_winner.png}
+    \end{figure}
+
+    \begin{description}
+            \begin{enumerate}
+            \item Tìm người chơi có điểm số cao nhất:
+                \begin{itemize}
+                    \item Duyệt qua danh sách người chơi để tìm người có điểm số cao nhất.
+                    \item Nếu có nhiều người chơi có cùng điểm số cao nhất, thêm tất cả vào danh sách người thắng.
+                \end{itemize}
+            \item Xác định người thắng:
+                \begin{itemize}
+                    \item Nếu chỉ có một người thắng, in ra thông tin người thắng và cập nhật thông tin của người đó
+                    \item Nếu có nhiều người thắng (hòa), in ra thông tin của tất cả người thắng và cập nhật thông tin của từng người.
+                    \item Xác định người chiến thắng.
+                \end{itemize}
+            \item Cập nhật thông tin người chơi:
+                \begin{itemize}
+                    \item Cập nhật số trận đấu, số trận thắng, tỉ lệ thắng và tình huống thắng cho cả người thắng và người thua.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+\end{itemize}
+
+\textbf{\fontsize{17pt}{0pt} *Chế độ PvE\_Poker:}
+
+\begin{itemize}
+    \item \textbf{int random\_number()}: Tạo ngẫu nhiên các số (1 đến 10). Nhằm tạo random của hàm xác định người chiến thắng.
+
+    \item \textbf{void run\_poker\_pve\_mode()}: Khởi tạo và thực thi chế độ chơi PVE
+
+    \begin{description}
+            \begin{enumerate}
+            \item Khởi tạo:
+                \begin{itemize}
+                    \item Khởi tạo hai người chơi: người chơi và bot.
+                    \item Chọn mức độ khó của bot.
+                \end{itemize}
+            \item Vòng lặp chơi:
+                \begin{itemize}
+                    \item Tạo bộ bài 52 lá và xáo bài.
+                    \item Chia bài cho người chơi và bot.
+                    \item Xác định người chiến thắng.
+                    \item Xác định loại bài và tính điểm cho cả người chơi và bot.
+                    \item Logic đặc biệt cho chế độ PvE: Sử dụng số ngẫu nhiên để quyết định xem bot có nên giữ lá bài mạnh nhất hay không, dựa trên mức độ khó.
+                    \item Hiển thị các lá bài của người chơi và bot.
+                    \item Xác định người thắng và cập nhật thông tin người chơi.
+                    \item Hiển thị thông tin người chơi và bảng xếp hạng.
+                    \item Hỏi người chơi có muốn tiếp tục hay không.
+                \end{itemize}
+            \item Kết thúc trò chơi:
+                \begin{itemize}
+                    \item In bảng xếp hạng cuối cùng.
+                    \item Lưu dữ liệu trò chơi vào file.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+
+    \item \textbf{void calculate\_player\_points(...)}: Tính điểm cho từng người chơi tương tự như PVP. Hàm đầy đủ ở dưới dây:
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/cal_player_2.png}
+    \end{figure}
+    \item \textbf{void determine\_winner\_PVE(...)}: Xác định người chiến thắng tương tự như PVP chỉ khác là ở người là bot. Khai báo hàm đầy đủ dưới đây:
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/det_winner_pve.png}
+    \end{figure}
+    \
+\end{itemize}
+
+\textbf{\fontsize{17pt}{0pt} *Chế độ Single Dual Card:}
+\begin{itemize}
+    \item \textbf{void run\_Single\_Card\_Duel()}: Hàm khởi tạo và thực thi chế độ chơi Single Card Duel
+    \begin{description}
+            \begin{enumerate}
+            \item Khởi tạo:
+                \begin{itemize}
+                    \item Khởi tạo số lượng người chơi.
+                    \item Khởi tạo thông tin cho mỗi người chơi.
+                \end{itemize}
+            \item Vòng lặp chơi:
+                \begin{itemize}
+                    \item Tạo bộ bài, xáo bài và chia bài cho các người chơi.
+                    \item Xác định giá trị và chất của lá bài mỗi người chơi.
+                    \item Xác định người chiến thắng.
+                    \item Cập nhật thông tin người chơi (số trận đấu, số trận thắng, tỉ lệ thắng, tình huống thắng).
+                    \item In thông tin người chơi và bảng xếp hạng.
+                    \item Hỏi người chơi có muốn tiếp tục hay không.
+                \end{itemize}
+            \item Kết thúc trò chơi:
+                \begin{itemize}
+                    \item In bảng xếp hạng cuối cùng.
+                    \item Lưu dữ liệu trò chơi vào file.
+                \end{itemize}
+        \end{enumerate}
+    \end{description}
+    \item \textbf{bool is\_stronger\_between\_2\_cards(const Card\& a, const Card\& b)}: Hàm kiểm tra giữa 2 lá bài lá nào mạnh hơn
+        
+    \item \textbf{void calculate\_player\_points\_Single\_Card\_Duel(...)}: Tính điểm cho từng người chơi trong chế độ Single Card Duel
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/calc_player.png}
+    \end{figure}
+
+    \item \textbf{void determine\_winner\_Single\_Card\_Duel(...)}: Xác định người chiến thắng. Khai báo hàm đầy đủ dưới đây.
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/det_win_tcp.png}
+    \end{figure}
+\end{itemize}
+
+\vspace{1cm}
+\textbf{\fontsize{17pt}{0pt} *Chế độ Three Card Poker (Bài cào):}
+\begin{itemize}
+    \item \textbf{void run\_Three\_Card\_Poker();}: Hàm khởi tạo và thực thi chế độ chơi Single Card Duel
+
+    \item \textbf{bool is\_stronger\_between\_2\_cards(const Card\& a, const Card\& b)}: Hàm kiểm tra giữa 2 lá bài lá nào mạnh hơn
+
+    \item \textbf{void calculate\_player\_points\_Three\_Card\_Poker(...)}: Tính điểm cho từng người chơi trong chế độ Single Card Duel
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/calc_player_tcp.png}
+    \end{figure}
+
+    \item \textbf{void determine\_winner\_Three\_Card\_Poker(...)}: Xác định người chiến thắng. Khai báo hàm đầy đủ dưới đây.
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.9\textwidth]{images/screenshot/det_win_tcp.png}
+    \end{figure}
+\end{itemize}
+
+\subsection{e. Thư viện "file\_manipulation.h": }
+Thư viện này bao gồm các hàm liên quan đến việc nhập xuất file và gồm các hàm:
+\begin{itemize}
+    \item \textbf{void clear\_file()}: Hàm xóa nội dung file
+    \item \textbf{void save\_game\_data\_to\_file(...)}: Hàm lưu dữ liệu trò chơi vào file
+    \item \textbf{void save\_game\_data\_to\_file\_poker\_PvE\_mode(...)}: Hàm lưu dữ liệu trò chơi vào file cho chế độ Poker PvE
+\end{itemize}
+Hàm được khai báo đầy đủ như sau:
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/3_e.png}
+    \end{figure}
+
+\vspace{3cm}
+\section{4. Cách hoạt động của chương trình}
+\subsection{a. Màn hình chính:}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/4_a_1.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/4_a_2.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/4_a_3.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/4_a_4.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/4_a_5.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/4_a_6.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/4_a_7.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/4_a_8.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/4_a_9.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/4_a_10.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/4_a_11.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{images/screenshot/4_a_12.png}
+    \end{figure}
+%-----------------------------------------------------------------------------
+\newpage
+\vspace{10cm}
+\section{II. THAM KHẢO}
+\section{1. Các nguồn trên mạng:}
+\subsection{a. Code: }
+\begin{itemize}
+    \item Tạo random number: \href{https://www.w3schools.com/cpp/cpp_howto_random_number.asp}{Tạo số ngẫu nhiên}
+    \item Thuật toán xáo bài: \href{https://www.w3schools.com/cpp/ref_algorithm_random_shuffle.asp}{C++ Algorithm\_random\_shuffe}
+    \item Đổi màu chữ trong terminal: \href{https://stackoverflow.com/questions/9158150/colored-output-in-c}{Colored output in C}
+\end{itemize}
+\subsection{b. Latex: }
+\begin{itemize}
+    \item Latex tutorial in Vietnamese: \href{https://github.com/mh0132345/latex-tutorial?tab=readme-ov-file#ch%C3%A8n-code}{Latex tutorial in Vietnamese}
+    \item Cách làm một báo cáo Latex (Đại học Bách Khoa Hà Nội): \href{https://www.youtube.com/watch?v=GVCkD927KMo&list=PLr45c93sdQCKgXoG73h2krsmbtT337f1u}{Link danh sách phát}
+    \item Tạo bảng tự động: \href{https://tableconvert.com/excel-to-latex}{Excel to Latex}
+    \item Gắn link: \href{https://www.baeldung.com/cs/latex-hyperref-url-hyperlinks}{Latex hyperref URL hyperlinks}
+    \item Tài liệu Latex môn Nhập môn Công nghệ thông tin.
+\end{itemize}
+\subsection{c. Luật chơi Poker:}
+\begin{itemize}
+    \item Upswing Poker: \href{https://upswingpoker.com/}{:link Upswing Poker}
+\end{itemize}
+
+\section{2. Các công cụ AI hỗ trợ:}
+Một số đoạn code tụi em không sử dụng nguồn code có sẵn mà nhờ sự hỗ trợ và các đoạn code được tạo hoặc sửa chữa bởi các loại AI , một số đoạn code dùng AI để chỉnh sửa. Dưới đây là các loại AI tụi em đã dùng:
+\begin{itemize}
+    \item Chat GPT
+    \item Gemini
+    \item Copilot
+\end{itemize}
+
+\section{3. Con người: }
+\begin{itemize}
+    \item\textbf{Mai Vinh Hiển}: Cựu chủ nhiệm GDGoC club
+    \item\textbf{Lê Quốc Vĩ}: học Khoa học máy tính HCMUT
+    \item\textbf{Phan Ngọc Mỹ Duyên}: học Khoa học máy tính HCMUT
+\end{itemize}
+
+\end{document}
