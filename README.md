@@ -53,6 +53,11 @@ We welcome contributions! Follow these steps to contribute:
 ## 📜 License  
 This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for details.  
 
+## 👥 Triple Star Team Members  
+- **Hoàng Cao Phong** – Team Leader, Game Logic Developer  
+- **Nguyễn Trung Kiên** – Backend Engineer, Technical Writer  
+- **Võ Thúc Trí** – UI/UX Designer, QA Tester  
+
 ## 📧 Contact  
 For inquiries or feedback, please reach out via email: **hoangcaophong.works@gmail.com**  
 
