@@ -39,9 +39,9 @@ Poker SimulatorSimulator Game is an advanced poker game simulation designed for 
    ```  
 
 ## 📖 How to Play  
-1. Choose game mode: PvP, PvE, Draw Poker, Single Card Duel, or Three Card Poker.  
-2. If playing PvE, select AI difficulty level (Lv1 - Normal, Lv2 - Challenge, Lv3 - Legendary). 
-3. Use commands/buttons to **Bet, Call, Fold, or Raise** during the game.  
+1. Choose game mode: PvP, PvE, Draw Poker, Single Card Duel, or Three Card Poker.
+2. You can select the number of participants, enter player information.
+3. If playing PvE, select AI difficulty level (Lv1 - Normal, Lv2 - Challenge, Lv3 - Legendary). 
 4. View statistics and analytics after each game session.  
 
 ## 🛠️ Contributing  
