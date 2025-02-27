@@ -1,7 +1,7 @@
-# Poker Simulation Game
+# Poker Simulator Game
 
 ## 📌 Overview  
-Poker Simulation Game is an advanced poker game simulation designed for both entertainment and strategic gameplay analysis. It supports multiple poker variants and provides an engaging experience through AI-powered opponents and real-time analytics.
+Poker SimulatorSimulator Game is an advanced poker game simulation designed for both entertainment and strategic gameplay analysis. It supports multiple poker variants and provides an engaging experience through AI-powered opponents and real-time analytics.
 
 ## 🎮 Features  
 - Multiple game modes: **PvP, PvE, Draw Poker, Single Card Duel, Three Card Poker**.  
@@ -24,7 +24,7 @@ Poker Simulation Game is an advanced poker game simulation designed for both ent
 ### Installation Steps  
 1. **Clone the repository:**  
    ```bash  
-   git clone https://github.com/yourusername/poker-simulation-game.git  
+   git clone https://github.com/yourusername/poker-simulator-game.git  
    cd poker-simulation-game  
    ```  
 
@@ -61,4 +61,4 @@ This project is licensed under the **Apache License 2.0**. See the [LICENSE](LIC
 ## 📧 Contact  
 For inquiries or feedback, please reach out via email: **hoangcaophong.works@gmail.com**  
 
-🚀 *Enjoy playing Poker Simulation Game!*
+🚀 *Enjoy playing Poker Simulator Game!*
